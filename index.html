@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NVIDIA Vera Rubin — CTO Technical Guide</title>
+<title>NVIDIA Solutions Builder — Enterprise Reference Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -43,13 +43,11 @@ body {
   overflow-x: hidden;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--border-accent); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
 
-/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0; left: 0;
@@ -129,7 +127,6 @@ body {
   font-size: 14px;
 }
 
-/* Main content */
 .main {
   margin-left: var(--sidebar-width);
   min-height: 100vh;
@@ -141,11 +138,9 @@ body {
   padding: 40px 48px 80px;
 }
 
-/* Section visibility */
 .section { display: none; }
 .section.active { display: block; }
 
-/* Header area */
 .section-header {
   margin-bottom: 36px;
   padding-bottom: 24px;
@@ -165,7 +160,6 @@ body {
   max-width: 680px;
 }
 
-/* Cards */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -187,39 +181,12 @@ body {
   transform: translateY(-2px);
 }
 
-.card-icon {
-  font-size: 28px;
-  margin-bottom: 12px;
-}
+.card-icon { font-size: 28px; margin-bottom: 12px; }
+.card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.card .metric { font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+.card .metric-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); }
 
-.card h3 {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.card p {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.card .metric {
-  font-family: var(--font-mono);
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.card .metric-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-dim);
-}
-
-/* Stat highlight boxes */
 .stat-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -235,22 +202,9 @@ body {
   text-align: center;
 }
 
-.stat-box .value {
-  font-family: var(--font-mono);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--accent);
-}
+.stat-box .value { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--accent); }
+.stat-box .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-top: 4px; }
 
-.stat-box .label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-dim);
-  margin-top: 4px;
-}
-
-/* Tables */
 .data-table {
   width: 100%;
   border-collapse: separate;
@@ -274,41 +228,16 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-.data-table td {
-  padding: 11px 16px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-secondary);
-}
-
+.data-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
 .data-table tr:last-child td { border-bottom: none; }
 .data-table tr:hover td { background: var(--bg-tertiary); }
+.data-table td:first-child { font-weight: 600; color: var(--text-primary); }
 
-.data-table td:first-child {
-  font-weight: 600;
-  color: var(--text-primary);
-}
+.mono { font-family: var(--font-mono); font-size: 12px; }
+.highlight { color: var(--accent); font-weight: 600; }
+.highlight-blue { color: var(--accent2); font-weight: 600; }
+.highlight-orange { color: var(--accent3); font-weight: 600; }
 
-.mono {
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-
-.highlight {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.highlight-blue {
-  color: var(--accent2);
-  font-weight: 600;
-}
-
-.highlight-orange {
-  color: var(--accent3);
-  font-weight: 600;
-}
-
-/* Spec badge */
 .spec-badge {
   display: inline-flex;
   align-items: center;
@@ -322,13 +251,8 @@ body {
   color: var(--text-secondary);
 }
 
-.spec-badge .dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-}
+.spec-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
-/* Architecture diagram */
 .arch-diagram {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -338,13 +262,7 @@ body {
   text-align: center;
 }
 
-.arch-layer {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 12px 0;
-}
+.arch-layer { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
 
 .arch-block {
   background: var(--bg-tertiary);
@@ -357,33 +275,14 @@ body {
   cursor: default;
 }
 
-.arch-block:hover {
-  border-color: var(--accent);
-  background: rgba(118, 185, 0, 0.05);
-}
-
+.arch-block:hover { border-color: var(--accent); background: rgba(118, 185, 0, 0.05); }
 .arch-block.green { border-top: 3px solid var(--accent); }
 .arch-block.blue { border-top: 3px solid var(--accent2); }
 .arch-block.orange { border-top: 3px solid var(--accent3); }
+.arch-block .name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.arch-block .detail { font-size: 11px; color: var(--text-dim); }
+.arch-connector { font-size: 20px; color: var(--text-dim); padding: 4px 0; }
 
-.arch-block .name {
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.arch-block .detail {
-  font-size: 11px;
-  color: var(--text-dim);
-}
-
-.arch-connector {
-  font-size: 20px;
-  color: var(--text-dim);
-  padding: 4px 0;
-}
-
-/* Callout */
 .callout {
   background: var(--bg-card);
   border-left: 4px solid var(--accent);
@@ -395,166 +294,38 @@ body {
 .callout.warning { border-left-color: var(--warning); }
 .callout.danger { border-left-color: var(--danger); }
 .callout.info { border-left-color: var(--accent2); }
+.callout h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.callout p { font-size: 13px; color: var(--text-secondary); }
 
-.callout h4 {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
+.comparison-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
 
-.callout p {
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-/* Comparison */
-.comparison-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
-  margin: 24px 0;
-}
-
-.comparison-col {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.comparison-col.current {
-  border-color: var(--accent);
-  box-shadow: 0 0 20px var(--accent-glow);
-}
-
-.comparison-header {
-  padding: 16px;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-}
-
-.comparison-header .gen {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-dim);
-}
-
-.comparison-header .name {
-  font-size: 16px;
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-.comparison-body {
-  padding: 16px;
-}
-
-.comparison-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-}
-
+.comparison-col { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.comparison-col.current { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+.comparison-header { padding: 16px; text-align: center; border-bottom: 1px solid var(--border); }
+.comparison-header .gen { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); }
+.comparison-header .name { font-size: 16px; font-weight: 700; margin-top: 4px; }
+.comparison-body { padding: 16px; }
+.comparison-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
 .comparison-row:last-child { border-bottom: none; }
 .comparison-row .val { font-family: var(--font-mono); font-weight: 600; font-size: 12px; }
 
-/* Timeline */
-.timeline {
-  position: relative;
-  margin: 24px 0;
-  padding-left: 32px;
-}
+.timeline { position: relative; margin: 24px 0; padding-left: 32px; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 0; width: 2px; height: 100%; background: var(--border-accent); }
+.timeline-item { position: relative; margin-bottom: 24px; }
+.timeline-item::before { content: ''; position: absolute; left: -28px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg-primary); }
+.timeline-item .date { font-size: 12px; font-family: var(--font-mono); color: var(--accent); margin-bottom: 4px; }
+.timeline-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.timeline-item p { font-size: 13px; color: var(--text-secondary); }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 8px; top: 0;
-  width: 2px;
-  height: 100%;
-  background: var(--border-accent);
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 24px;
-}
-
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -28px; top: 6px;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--bg-primary);
-}
-
-.timeline-item .date {
-  font-size: 12px;
-  font-family: var(--font-mono);
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.timeline-item h4 {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.timeline-item p {
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-/* Tabs */
-.tab-bar {
-  display: flex;
-  gap: 4px;
-  margin: 20px 0;
-  background: var(--bg-tertiary);
-  border-radius: 10px;
-  padding: 4px;
-}
-
-.tab-btn {
-  flex: 1;
-  padding: 10px 16px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: var(--font-body);
-}
-
+.tab-bar { display: flex; gap: 4px; margin: 20px 0; background: var(--bg-tertiary); border-radius: 10px; padding: 4px; }
+.tab-btn { flex: 1; padding: 10px 16px; font-size: 13px; font-weight: 500; color: var(--text-secondary); background: transparent; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-family: var(--font-body); }
 .tab-btn:hover { color: var(--text-primary); }
-.tab-btn.active {
-  background: var(--accent);
-  color: var(--bg-primary);
-  font-weight: 600;
-}
-
+.tab-btn.active { background: var(--accent); color: var(--bg-primary); font-weight: 600; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* Footer */
-.footer {
-  margin-top: 48px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
-  font-size: 12px;
-  color: var(--text-dim);
-  text-align: center;
-}
+.footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-dim); text-align: center; }
 
-/* Responsive */
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
@@ -562,42 +333,21 @@ body {
   .content { padding: 24px 20px 60px; }
   .comparison-grid { grid-template-columns: 1fr; }
   .card-grid { grid-template-columns: 1fr; }
-  .mobile-toggle {
-    display: flex !important;
-    position: fixed;
-    top: 12px; left: 12px;
-    z-index: 200;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 12px;
-    color: var(--text-primary);
-    font-size: 18px;
-    cursor: pointer;
-  }
+  .mobile-toggle { display: flex !important; position: fixed; top: 12px; left: 12px; z-index: 200; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; color: var(--text-primary); font-size: 18px; cursor: pointer; }
 }
-
 .mobile-toggle { display: none; }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section.active { animation: fadeIn 0.3s ease; }
 
-.section.active {
-  animation: fadeIn 0.3s ease;
-}
-
-/* Progress indicator on sidebar */
-.nav-item .progress-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--border-accent);
-  margin-left: auto;
-}
-
+.nav-item .progress-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-accent); margin-left: auto; }
 .nav-item.active .progress-dot { background: var(--accent); }
+
+/* New: tag badges for gen labels */
+.gen-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+.gen-tag.bw { background: rgba(0,163,255,0.15); color: var(--accent2); }
+.gen-tag.vr { background: rgba(118,185,0,0.15); color: var(--accent); }
+.gen-tag.both { background: rgba(255,107,53,0.15); color: var(--accent3); }
 </style>
 </head>
 <body>
@@ -606,49 +356,57 @@ body {
 
 <nav class="sidebar">
   <div class="sidebar-header">
-    <h1>NVIDIA Vera Rubin</h1>
-    <p>CTO Technical Guide</p>
+    <h1>NVIDIA Solutions Builder</h1>
+    <p>Enterprise Reference Guide</p>
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">Overview</div>
+    <div class="nav-section-title">Platform</div>
     <div class="nav-item active" data-section="overview">
-      <span class="icon">🏠</span> Platform Overview
+      <span class="icon">🏠</span> Overview
     </div>
-    <div class="nav-item" data-section="gpu">
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Current Gen — Blackwell</div>
+    <div class="nav-item" data-section="b300">
+      <span class="icon">⚡</span> HGX B300 / GB300
+    </div>
+    <div class="nav-item" data-section="gb300nvl72">
+      <span class="icon">🖥️</span> GB300 NVL72 RA
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Next Gen — Vera Rubin</div>
+    <div class="nav-item" data-section="vr-overview">
+      <span class="icon">🧠</span> VR Platform
+    </div>
+    <div class="nav-item" data-section="rubin-gpu">
       <span class="icon">⚡</span> Rubin GPU
     </div>
-    <div class="nav-item" data-section="vera">
-      <span class="icon">🧠</span> Vera CPU
+    <div class="nav-item" data-section="vera-cpu">
+      <span class="icon">🔧</span> Vera CPU
     </div>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-title">Networking</div>
-    <div class="nav-item" data-section="nvlink">
+    <div class="nav-item" data-section="nvl6">
       <span class="icon">🔗</span> NVLink 6
     </div>
-    <div class="nav-item" data-section="connectx">
+    <div class="nav-item" data-section="cx9">
       <span class="icon">🌐</span> ConnectX-9
     </div>
-    <div class="nav-item" data-section="spectrum">
+    <div class="nav-item" data-section="sp6">
       <span class="icon">📡</span> Spectrum-6
     </div>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-title">Storage & DPU</div>
-    <div class="nav-item" data-section="bluefield">
+    <div class="nav-item" data-section="bf4">
       <span class="icon">💾</span> BlueField-4 & STX
     </div>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-title">Systems</div>
-    <div class="nav-item" data-section="nvl72">
-      <span class="icon">🖥️</span> NVL72 Rack
+    <div class="nav-item" data-section="vrnvl72">
+      <span class="icon">🖥️</span> VR NVL72 Rack
     </div>
-    <div class="nav-item" data-section="groq">
+    <div class="nav-item" data-section="hgxvr">
+      <span class="icon">🖥️</span> HGX Rubin NVL8
+    </div>
+    <div class="nav-item" data-section="groq3">
       <span class="icon">🚀</span> Groq 3 LPX
     </div>
     <div class="nav-item" data-section="dsx">
@@ -657,15 +415,51 @@ body {
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">Strategy</div>
-    <div class="nav-item" data-section="comparison">
-      <span class="icon">📊</span> Gen Comparison
+    <div class="nav-section-title">Networking</div>
+    <div class="nav-item" data-section="networking">
+      <span class="icon">🌐</span> Networking at Scale
     </div>
-    <div class="nav-item" data-section="software">
-      <span class="icon">💿</span> Software Stack
+    <div class="nav-item" data-section="ib">
+      <span class="icon">🔴</span> InfiniBand Compute
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">AI Solutions</div>
+    <div class="nav-item" data-section="rag">
+      <span class="icon">🔍</span> Enterprise RAG
+    </div>
+    <div class="nav-item" data-section="aiq">
+      <span class="icon">🤖</span> AI-Q Research Agent
+    </div>
+    <div class="nav-item" data-section="openshell">
+      <span class="icon">🛡️</span> OpenShell & Agents
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Software Stack</div>
+    <div class="nav-item" data-section="ncp-sw">
+      <span class="icon">💿</span> NCP Software
+    </div>
+    <div class="nav-item" data-section="runai">
+      <span class="icon">☸️</span> Run:ai / K8s
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Operations</div>
+    <div class="nav-item" data-section="roadmap">
+      <span class="icon">📅</span> Roadmap & EOL
+    </div>
+    <div class="nav-item" data-section="cooling">
+      <span class="icon">❄️</span> Liquid Cooling
     </div>
     <div class="nav-item" data-section="procurement">
       <span class="icon">📋</span> Procurement
+    </div>
+    <div class="nav-item" data-section="comparison">
+      <span class="icon">📊</span> Gen Comparison
     </div>
   </div>
 </nav>
@@ -676,7 +470,255 @@ body {
     <!-- ==================== OVERVIEW ==================== -->
     <div class="section active" id="overview">
       <div class="section-header">
-        <h2>NVIDIA Vera Rubin Platform</h2>
+        <h2>NVIDIA Solutions Builder</h2>
+        <p>Your technical reference for building NVIDIA-powered AI infrastructure — from current-gen Blackwell to next-gen Vera Rubin, reference architectures, AI solutions, and datacenter operations.</p>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway</h4>
+        <p>The AI infrastructure landscape is shifting from buying discrete servers to procuring <strong>integrated rack-scale systems</strong> where compute, networking, and storage are codesigned. This guide covers both the current Blackwell generation you can deploy today, and the Vera Rubin platform coming in H2 2026 — so you can plan your capacity, negotiate contracts, and design datacenter infrastructure across both generations.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="value">2</div>
+          <div class="label">GPU Generations</div>
+        </div>
+        <div class="stat-box">
+          <div class="value">7</div>
+          <div class="label">VR New Chips</div>
+        </div>
+        <div class="stat-box">
+          <div class="value">16K+</div>
+          <div class="label">GPU Scale</div>
+        </div>
+        <div class="stat-box">
+          <div class="value">10×</div>
+          <div class="label">VR Inference / Watt</div>
+        </div>
+        <div class="stat-box">
+          <div class="value">5×</div>
+          <div class="label">STX Inference Boost</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:28px 0 16px;">What's In This Guide</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Current Gen: Blackwell</h3>
+          <p>HGX B300 and GB300 NVL72 — the platform you can deploy today. Enterprise RA and NCP reference designs with Spectrum-X networking.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <h3>Next Gen: Vera Rubin</h3>
+          <p>Seven breakthrough chips, five purpose-built racks, one integrated supercomputer. Available H2 2026. Plan your infrastructure now.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>Networking at Scale</h3>
+          <p>Converged and dedicated network topologies from 1K to 16K GPUs. Spectrum-X Ethernet and InfiniBand reference designs.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <h3>AI Solutions</h3>
+          <p>Enterprise RAG, AI-Q Research Agent, and NVIDIA OpenShell for autonomous agents. Deployment guides, sizing, and benchmarking.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💿</div>
+          <h3>Software Stack</h3>
+          <p>NCP Software Reference Architecture, Run:ai on Kubernetes, NVIDIA AI Enterprise. IaaS, CaaS, and AI PaaS layers.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <h3>Operations & Roadmap</h3>
+          <p>Product EOL timelines, Vera Rubin launch schedule, liquid cooling specs, procurement planning, and generational comparison.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:28px 0 16px;">Platform Architecture</h3>
+      <div class="arch-diagram">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-bottom:16px;">NVIDIA AI Infrastructure — Two Generations</div>
+
+        <div class="arch-layer">
+          <div class="arch-block blue">
+            <div class="name">Blackwell / GB300</div>
+            <div class="detail">Shipping Now · B300 GPU · Grace CPU</div>
+          </div>
+          <div class="arch-block green">
+            <div class="name">Vera Rubin</div>
+            <div class="detail">H2 2026 · Rubin GPU · Vera CPU</div>
+          </div>
+        </div>
+
+        <div class="arch-connector">↕ NVLink 5 / NVLink 6 + Spectrum-X / Quantum-X800 ↕</div>
+
+        <div class="arch-layer">
+          <div class="arch-block orange">
+            <div class="name">Networking</div>
+            <div class="detail">Spectrum-4/6 · ConnectX-8/9 · BF-3/4</div>
+          </div>
+          <div class="arch-block orange">
+            <div class="name">AI Solutions</div>
+            <div class="detail">RAG · AI-Q · OpenShell · NIM</div>
+          </div>
+          <div class="arch-block orange">
+            <div class="name">Software</div>
+            <div class="detail">CUDA · Run:ai · NeMo · Dynamo</div>
+          </div>
+        </div>
+
+        <div class="arch-connector">↕ DSX Power Management + Liquid Cooling ↕</div>
+
+        <div style="background:var(--bg-tertiary);border:1px solid var(--border-accent);border-radius:8px;padding:14px 24px;display:inline-block;margin-top:8px;">
+          <div style="font-size:12px;font-weight:600;color:var(--accent);">AI Factory Reference Design (DSX)</div>
+          <div style="font-size:11px;color:var(--text-dim);">Codesigned power, cooling, compute, networking, storage</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== HGX B300 / GB300 ==================== -->
+    <div class="section" id="b300">
+      <div class="section-header">
+        <h2>HGX B300 / GB300 Platform</h2>
+        <p>The current generation of NVIDIA AI infrastructure — Blackwell Ultra GPUs in HGX and NVL72 configurations, available from OEM partners today.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="value">8</div>
+          <div class="label">B300 GPUs / Server</div>
+        </div>
+        <div class="stat-box">
+          <div class="value">72</div>
+          <div class="label">B300 GPUs / NVL72</div>
+        </div>
+        <div class="stat-box">
+          <div class="value">NVLink 5</div>
+          <div class="label">Interconnect</div>
+        </div>
+        <div class="stat-box">
+          <div class="value">ConnectX-8</div>
+          <div class="label">SuperNIC</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Key Components</h3>
+      <table class="data-table">
+        <tr><th>Component</th><th>Specification</th><th>Notes</th></tr>
+        <tr><td>GPU</td><td class="mono">HGX B300 (Blackwell Ultra)</td><td>8 per server in HGX config</td></tr>
+        <tr><td>CPU</td><td class="mono">Grace / Intel GNR</td><td>Grace (ARM) or Granite Rapids (x86)</td></tr>
+        <tr><td>Interconnect</td><td class="mono">NVLink 5</td><td>72-GPU NVL domain</td></tr>
+        <tr><td>Scale-Out NIC</td><td class="mono">ConnectX-8 SuperNIC</td><td>400 Gb/s per GPU</td></tr>
+        <tr><td>DPU</td><td class="mono">BlueField-3</td><td>Network/storage/security offload</td></tr>
+        <tr><td>Ethernet Switch</td><td class="mono">SN5600 / SN5610</td><td>Spectrum-4 platform</td></tr>
+        <tr><td>Management Switch</td><td class="mono">SN2201</td><td>1GbE OOB management</td></tr>
+        <tr><td>Cooling</td><td class="mono">Direct Liquid (required)</td><td>NVL72 mandatory DLC</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Enterprise RA Configuration</h3>
+      <div class="callout info">
+        <h4>📐 2-8-9-800 Node Architecture</h4>
+        <p>The Enterprise RA uses a <strong>2-8-9-800</strong> nomenclature: 2 CPUs, 8 GPUs, 9 NICs (8× ConnectX-8 + 1× BlueField-3), 800 Gb/s per GPU. Systems are organised into Scalable Units (SUs) of 4 partner servers each, providing rapid deployment of multiple cluster sizes.</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🖥️</div>
+          <h3>HGX B300 Server</h3>
+          <p>8× B300 GPUs with NVLink 5 full-mesh interconnect. 2× Grace or Intel GNR CPUs. 8× ConnectX-8 SuperNICs for scale-out. 1× BlueField-3 DPU for management and offload. The standard AI training server.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔗</div>
+          <h3>NVLink 5 Switch Tray</h3>
+          <p>Enables the 72-GPU NVL domain within the NVL72 rack. Full-bandwidth GPU-to-GPU communication. Critical for large-model training where parameters must be shuffled across GPUs rapidly.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>Spectrum-X Networking</h3>
+          <p>Spectrum-4 Ethernet platform with SN5600/SN5610 switches. Multi-plane and converged topologies for 1K–16K GPU clusters. BlueField-3 DPU acceleration for in-network compute.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: Deploy Now, Plan for VR</h4>
+        <p>GB300 NVL72 is the platform you can deploy today. If you need capacity now, don't wait for Vera Rubin — but design your infrastructure (power, cooling, network) to be VR-ready. Key differences: VR uses ConnectX-9 and BlueField-4, but the rack footprint and DLC requirements are similar. Plan for a <strong>rolling upgrade path</strong> from B300 to VR NVL72.</p>
+      </div>
+    </div>
+
+    <!-- ==================== GB300 NVL72 RA ==================== -->
+    <div class="section" id="gb300nvl72">
+      <div class="section-header">
+        <h2>GB300 NVL72 Reference Architecture</h2>
+        <p>The NVIDIA Cloud Partner (NCP) Reference Design for GB300 NVL72 systems with Spectrum-X — the certified blueprint for AI cloud deployments.</p>
+      </div>
+
+      <div class="callout info">
+        <h4>📋 NCP Reference Design NVIS139-NCPRA-GB300</h4>
+        <p>This architecture details a <strong>scalable and modular architecture</strong> for the GB300 NVL72 system configuration. Built upon building blocks of Scalable Units (SUs), each containing <strong>2 or 7 GB300 NVL72 racks</strong>, which provides rapid deployment of multiple configuration sizes.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Key Technologies</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>GB300 NVL72 Systems</h3>
+          <p>72× Blackwell Ultra GPUs in NVL72 rack configuration. NVLink 5 full-mesh interconnect. The compute building block for NCP deployments.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>Spectrum-4 Ethernet</h3>
+          <p>SN5600/SN5610 switches for compute fabric. Multi-plane and converged network topologies. BlueField-3 DPU for acceleration and isolation.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💾</div>
+          <h3>BlueField-3 DPUs</h3>
+          <p>Network/storage/security offload. DPU mode or NIC mode. Enables multitenancy with hardware isolation. EVPN-MH and ECMP resiliency.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💿</div>
+          <h3>NVIDIA AI Enterprise</h3>
+          <p>Full software stack: Base Command Manager, CUDA, Magnum IO, NetQ. NVEX enterprise support. Keeps all components running smoothly.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Scalable Unit Design</h3>
+      <table class="data-table">
+        <tr><th>Scale</th><th>Configuration</th><th>GPU Count</th></tr>
+        <tr><td>SU-2</td><td class="mono">2× GB300 NVL72 racks</td><td class="mono">144 GPUs</td></tr>
+        <tr><td>SU-7</td><td class="mono">7× GB300 NVL72 racks</td><td class="mono">504 GPUs</td></tr>
+        <tr><td>Multi-SU</td><td class="mono">8× SU-7 groups</td><td class="mono">4,032 GPUs</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Network Topology Options</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🔗</div>
+          <h3>Multi-Plane (Dedicated)</h3>
+          <p>Separate networks for compute, HPS, and management. Maximum performance and isolation. Best for large-scale dedicated deployments.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔀</div>
+          <h3>Converged Network</h3>
+          <p>Compute, HPS, and in-band management combined. Lower switch count, simpler cabling. Ideal for NCP multi-tenant environments.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📡</div>
+          <h3>Out-of-Band Management</h3>
+          <p>Dedicated SN2201-based management network for BMC access, switch management, and telemetry. Separate from production traffic.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: Start with SU-2, Scale to SU-7</h4>
+        <p>The modular SU design means you can start with just <strong>2 NVL72 racks (144 GPUs)</strong> and scale incrementally. Each SU-7 group (504 GPUs) forms a natural scaling unit. For NCP providers, the converged network topology reduces switch count by ~40% vs multi-plane while maintaining performance for most AI workloads.</p>
+      </div>
+    </div>
+
+    <!-- ==================== VERA RUBIN OVERVIEW ==================== -->
+    <div class="section" id="vr-overview">
+      <div class="section-header">
+        <h2>Vera Rubin Platform</h2>
         <p>The next-generation AI infrastructure platform — seven breakthrough chips, five purpose-built racks, one integrated supercomputer for every phase of AI.</p>
       </div>
 
@@ -718,7 +760,7 @@ body {
         <div class="card">
           <div class="card-icon">🧠</div>
           <h3>Vera CPU</h3>
-          <p>Custom ARM-based CPU. 50% faster, 2× more efficient than traditional CPUs. Powers RL environments and CPU racks.</p>
+          <p>Custom ARM CPU. 1.5× single-thread vs AMD Venice. 768GB LPDDR5 per CPU. Unified ARM across the platform.</p>
         </div>
         <div class="card">
           <div class="card-icon">🔗</div>
@@ -733,7 +775,7 @@ body {
         <div class="card">
           <div class="card-icon">💾</div>
           <h3>BlueField-4 DPU</h3>
-          <p>Data processing unit with integrated Vera CPU + ConnectX-9. Powers STX storage racks.</p>
+          <p>DPU with integrated Vera CPU + ConnectX-9. Powers STX storage racks.</p>
         </div>
         <div class="card">
           <div class="card-icon">📡</div>
@@ -750,7 +792,6 @@ body {
       <h3 style="font-size:16px;margin:28px 0 16px;">Platform Architecture</h3>
       <div class="arch-diagram">
         <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-bottom:16px;">Vera Rubin POD-Scale Architecture</div>
-
         <div class="arch-layer">
           <div class="arch-block green">
             <div class="name">NVL72 GPU Rack</div>
@@ -765,9 +806,7 @@ body {
             <div class="detail">256× LPU (inference)</div>
           </div>
         </div>
-
         <div class="arch-connector">↕ NVLink 6 + Spectrum-X + Quantum-X800 ↕</div>
-
         <div class="arch-layer">
           <div class="arch-block blue">
             <div class="name">BlueField-4 STX Rack</div>
@@ -778,9 +817,7 @@ body {
             <div class="detail">East-West Ethernet / IB</div>
           </div>
         </div>
-
         <div class="arch-connector">↕ DSX Power Management + Liquid Cooling ↕</div>
-
         <div style="background:var(--bg-tertiary);border:1px solid var(--border-accent);border-radius:8px;padding:14px 24px;display:inline-block;margin-top:8px;">
           <div style="font-size:12px;font-weight:600;color:var(--accent);">AI Factory Reference Design (DSX)</div>
           <div style="font-size:11px;color:var(--text-dim);">Codesigned power, cooling, compute, networking, storage</div>
@@ -794,7 +831,7 @@ body {
     </div>
 
     <!-- ==================== RUBIN GPU ==================== -->
-    <div class="section" id="gpu">
+    <div class="section" id="rubin-gpu">
       <div class="section-header">
         <h2>Rubin GPU</h2>
         <p>The compute heart of the Vera Rubin platform. A generational leap over Blackwell, designed for mixture-of-experts training and agentic inference at scale.</p>
@@ -838,7 +875,6 @@ body {
         <p>Nvidia's headline metric is MoE training efficiency, not raw FLOPS. This signals that the industry has moved from "how many FLOPS?" to "how efficiently can I train large mixture-of-experts models?" When evaluating GPU vendors, insist on MoE benchmarks that match your model architecture, not synthetic FLOPS numbers.</p>
       </div>
 
-      <h3 style="font-size:16px;margin:24px 0 12px;">What Nvidia Hasn't Published Yet</h3>
       <div class="callout warning">
         <h4>⚠️ Still Under NDA / Not Disclosed</h4>
         <p>The following critical specs were <strong>not</strong> in the public announcement as of GTC March 2026:</p>
@@ -855,33 +891,59 @@ body {
     </div>
 
     <!-- ==================== VERA CPU ==================== -->
-    <div class="section" id="vera">
+    <div class="section" id="vera-cpu">
       <div class="section-header">
         <h2>Vera CPU</h2>
-        <p>Nvidia's custom ARM-based CPU purpose-built for AI infrastructure — powering everything from RL environments to storage controllers.</p>
+        <p>Nvidia's custom ARM-based CPU purpose-built for AI infrastructure — 1.5× single-thread performance vs AMD Venice, unified ARM across the entire Rubin portfolio.</p>
       </div>
 
       <div class="stat-row">
         <div class="stat-box">
-          <div class="value">50%</div>
-          <div class="label">Faster Than x86</div>
+          <div class="value">1.5×</div>
+          <div class="label">Single-Thread vs Venice</div>
         </div>
         <div class="stat-box">
           <div class="value">2×</div>
-          <div class="label">More Efficient</div>
+          <div class="label">Memory BW / Core</div>
         </div>
         <div class="stat-box">
-          <div class="value">256</div>
-          <div class="label">CPUs per Rack</div>
+          <div class="value">88C</div>
+          <div class="label">Cores (vs 192C Venice)</div>
+        </div>
+        <div class="stat-box">
+          <div class="value">768 GB</div>
+          <div class="label">LPDDR5 per CPU</div>
         </div>
       </div>
 
-      <h3 style="font-size:16px;margin:24px 0 12px;">Dual Role in Vera Rubin</h3>
+      <h3 style="font-size:16px;margin:24px 0 12px;">Vera vs AMD Venice Benchmarks</h3>
+      <table class="data-table">
+        <tr><th>Benchmark</th><th>Vera Advantage</th><th>Impact</th></tr>
+        <tr><td>LLVM (Compiled LOC)</td><td class="mono highlight">1.5×</td><td>Faster compilation for build pipelines</td></tr>
+        <tr><td>Perl (Script Execution)</td><td class="mono highlight">1.4×</td><td>Scripting and automation speedup</td></tr>
+        <tr><td>PyPerf (Python)</td><td class="mono highlight">1.3×</td><td>ML/AI data processing throughput</td></tr>
+        <tr><td>Snappy (Compression)</td><td class="mono highlight">1.5–1.6×</td><td>Data pipeline compression speed</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Memory Decision: 768GB Only</h3>
+      <div class="callout info">
+        <h4>📐 May 2026 POR Update</h4>
+        <p>Vera Rubin NVL72 will ship with <strong>768GB LPDDR5 per Vera only</strong> — no 1.5TB option. Key implications:</p>
+        <ul style="margin-top:8px;padding-left:20px;font-size:13px;color:var(--text-secondary);">
+          <li><strong>Same performance</strong> as 1.5TB config on inference and training workloads</li>
+          <li><strong>~10% lower rack cost</strong> vs 1.5TB — enables ~10% more racks for same budget</li>
+          <li><strong>1.5× more system memory</strong> vs GB200/GB300 (512GB per Grace)</li>
+          <li>Applications use full memory hierarchy: LP5 → NVMe → Network → BF-4 STX</li>
+          <li>Required for robust LP5 memory supply</li>
+        </ul>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Triple Role in Vera Rubin</h3>
       <div class="card-grid">
         <div class="card">
           <div class="card-icon">🖥️</div>
-          <h3>CPU Compute Rack</h3>
-          <p>256 Vera CPUs in a liquid-cooled MGX rack. Purpose-built for reinforcement learning environments — simulating, testing, and validating agentic AI outputs at scale. Integrated with Spectrum-X for tight synchronisation across the AI factory.</p>
+          <h3>NVL72 Host CPU</h3>
+          <p>36 Vera CPUs alongside 72 Rubin GPUs in the NVL72 rack. Unified ARM architecture across the entire POD. 1.5× evaluation throughput = 15%+ faster convergence for RL workloads.</p>
         </div>
         <div class="card">
           <div class="card-icon">💾</div>
@@ -890,19 +952,19 @@ body {
         </div>
         <div class="card">
           <div class="card-icon">🖥️</div>
-          <h3>NVL72 Host CPU</h3>
-          <p>36 Vera CPUs sit alongside 72 Rubin GPUs in the NVL72 rack, providing host processing for the GPU compute nodes. Unified ARM architecture across the entire POD.</p>
+          <h3>HGX Rubin NVL8</h3>
+          <p>2× Vera CPUs with 8× Rubin GPUs in the HGX NVL8 server. 3TB system memory (8× 192GB LPDDR5 SOCAMM per socket). Drop-in compatible with Intel GNR reference design. Available Q4 2026.</p>
         </div>
       </div>
 
       <div class="callout">
         <h4>🎯 CTO Takeaway: ARM-First AI Factory</h4>
-        <p>Vera makes the AI factory <strong>entirely ARM-based</strong> — no x86 anywhere in the POD. This eliminates x86 licensing costs, reduces power, and simplifies software stack management. If your existing infrastructure is x86-heavy, plan for a parallel ARM tooling investment (compilers, profiling, monitoring agents).</p>
+        <p>Vera makes the AI factory <strong>entirely ARM-based</strong> — no x86 anywhere in the POD. This eliminates x86 licensing costs, reduces power, and simplifies software stack management. <strong>Unifying on ARM across the entire Rubin portfolio maximises fungibility</strong> with one SW stack, one architecture, and simpler operations. If your existing infrastructure is x86-heavy, plan for a parallel ARM tooling investment.</p>
       </div>
     </div>
 
     <!-- ==================== NVLINK 6 ==================== -->
-    <div class="section" id="nvlink">
+    <div class="section" id="nvl6">
       <div class="section-header">
         <h2>NVLink 6</h2>
         <p>The sixth generation of Nvidia's proprietary GPU interconnect — the backbone connecting 72 Rubin GPUs into a single coherent domain.</p>
@@ -929,7 +991,7 @@ body {
     </div>
 
     <!-- ==================== CONNECTX-9 ==================== -->
-    <div class="section" id="connectx">
+    <div class="section" id="cx9">
       <div class="section-header">
         <h2>ConnectX-9 SuperNIC</h2>
         <p>Ultra-low-latency network interface controller — the GPU's direct connection to the scale-out network.</p>
@@ -960,25 +1022,16 @@ body {
     </div>
 
     <!-- ==================== SPECTRUM-6 ==================== -->
-    <div class="section" id="spectrum">
+    <div class="section" id="sp6">
       <div class="section-header">
         <h2>Spectrum-6 SPX Ethernet</h2>
         <p>The rack-to-rack fabric for AI factories — available in both Spectrum-X Ethernet and Quantum-X800 InfiniBand variants.</p>
       </div>
 
       <div class="stat-row">
-        <div class="stat-box">
-          <div class="value">5×</div>
-          <div class="label">Optical Power Efficiency</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">10×</div>
-          <div class="label">Optical Resiliency</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">CPO</div>
-          <div class="label">Co-Packaged Optics</div>
-        </div>
+        <div class="stat-box"><div class="value">5×</div><div class="label">Optical Power Efficiency</div></div>
+        <div class="stat-box"><div class="value">10×</div><div class="label">Optical Resiliency</div></div>
+        <div class="stat-box"><div class="value">CPO</div><div class="label">Co-Packaged Optics</div></div>
       </div>
 
       <h3 style="font-size:16px;margin:24px 0 12px;">Ethernet vs InfiniBand Choice</h3>
@@ -995,12 +1048,12 @@ body {
 
       <div class="callout">
         <h4>🎯 CTO Takeaway: Go Ethernet Unless You're Building Stargate</h4>
-        <p>Spectrum-X Ethernet is now "good enough" for most AI workloads, including large-scale training. InfiniBand's latency advantage matters only at extreme scale (>10k GPUs) or for HPC workloads. The management simplicity and multi-vendor compatibility of Ethernet reduces TCO significantly. Choose InfiniBand only if you're building a national-scale AI factory or have strict HPC requirements.</p>
+        <p>Spectrum-X Ethernet is now "good enough" for most AI workloads, including large-scale training. InfiniBand's latency advantage matters only at extreme scale (>10k GPUs) or for HPC workloads. The management simplicity and multi-vendor compatibility of Ethernet reduces TCO significantly.</p>
       </div>
     </div>
 
-    <!-- ==================== BLUEFIELD ==================== -->
-    <div class="section" id="bluefield">
+    <!-- ==================== BLUEFIELD-4 ==================== -->
+    <div class="section" id="bf4">
       <div class="section-header">
         <h2>BlueField-4 & STX Storage</h2>
         <p>AI-native storage infrastructure that extends GPU memory across the POD — purpose-built for the KV cache problem in agentic AI.</p>
@@ -1025,83 +1078,46 @@ body {
       </div>
 
       <div class="stat-row">
-        <div class="stat-box">
-          <div class="value">5×</div>
-          <div class="label">Inference Throughput Boost</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">POD-wide</div>
-          <div class="label">Context Memory</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">KV Cache</div>
-          <div class="label">Purpose-Built Tier</div>
-        </div>
+        <div class="stat-box"><div class="value">5×</div><div class="label">Inference Throughput Boost</div></div>
+        <div class="stat-box"><div class="value">POD-wide</div><div class="label">Context Memory</div></div>
+        <div class="stat-box"><div class="value">16 TB</div><div class="label">Network Storage / GPU</div></div>
       </div>
 
       <div class="callout">
         <h4>🎯 CTO Takeaway: The KV Cache Problem is Real</h4>
-        <p>As context windows grow (1M+ tokens in agentic AI), KV cache becomes the dominant memory consumer. Traditional approaches — offloading to CPU RAM or SSD — add latency and complexity. <strong>STX creates a dedicated tier</strong> between GPU HBM and general storage, purpose-built for KV cache. If you're serving long-context models, this alone justifies the Vera Rubin platform over alternatives.</p>
+        <p>As context windows grow (1M+ tokens in agentic AI), KV cache becomes the dominant memory consumer. <strong>STX creates a dedicated tier</strong> between GPU HBM and general storage, purpose-built for KV cache. The Vera Rubin memory hierarchy is: LPDDR5 (768GB) → NVMe (8TB/GPU) → BF-4 STX (16TB/GPU) — a far richer hierarchy than GB300.</p>
       </div>
     </div>
 
-    <!-- ==================== NVL72 ==================== -->
-    <div class="section" id="nvl72">
+    <!-- ==================== VR NVL72 RACK ==================== -->
+    <div class="section" id="vrnvl72">
       <div class="section-header">
         <h2>Vera Rubin NVL72 Rack</h2>
         <p>The primary compute building block — 72 Rubin GPUs and 36 Vera CPUs connected by NVLink 6 in a single liquid-cooled rack.</p>
       </div>
 
       <div class="stat-row">
-        <div class="stat-box">
-          <div class="value">72</div>
-          <div class="label">Rubin GPUs</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">36</div>
-          <div class="label">Vera CPUs</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">72</div>
-          <div class="label">ConnectX-9 NICs</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">72</div>
-          <div class="label">BlueField-4 DPUs</div>
-        </div>
+        <div class="stat-box"><div class="value">72</div><div class="label">Rubin GPUs</div></div>
+        <div class="stat-box"><div class="value">36</div><div class="label">Vera CPUs</div></div>
+        <div class="stat-box"><div class="value">768 GB</div><div class="label">LPDDR5 / CPU</div></div>
+        <div class="stat-box"><div class="value">8 TB</div><div class="label">NVMe / GPU</div></div>
+        <div class="stat-box"><div class="value">16 TB</div><div class="label">STX Net Storage / GPU</div></div>
       </div>
 
       <h3 style="font-size:16px;margin:24px 0 12px;">NVL72 Architecture</h3>
       <div class="arch-diagram">
         <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-bottom:16px;">NVL72 Rack Internal Topology</div>
-
         <div class="arch-layer">
-          <div class="arch-block green">
-            <div class="name">Rubin GPU × 72</div>
-            <div class="detail">AI Compute</div>
-          </div>
+          <div class="arch-block green"><div class="name">Rubin GPU × 72</div><div class="detail">AI Compute</div></div>
         </div>
-
         <div class="arch-connector">↕ NVLink 6 (full mesh) ↕</div>
-
         <div class="arch-layer">
-          <div class="arch-block blue">
-            <div class="name">Vera CPU × 36</div>
-            <div class="detail">Host Processing</div>
-          </div>
-          <div class="arch-block blue">
-            <div class="name">NVLink 6 Switch</div>
-            <div class="detail">Interconnect</div>
-          </div>
+          <div class="arch-block blue"><div class="name">Vera CPU × 36</div><div class="detail">Host Processing (768GB LP5 each)</div></div>
+          <div class="arch-block blue"><div class="name">NVLink 6 Switch</div><div class="detail">Interconnect</div></div>
         </div>
-
         <div class="arch-connector">↕ ConnectX-9 + BlueField-4 ↕</div>
-
         <div class="arch-layer">
-          <div class="arch-block orange">
-            <div class="name">Scale-Out Fabric</div>
-            <div class="detail">Spectrum-X / Quantum-X800</div>
-          </div>
+          <div class="arch-block orange"><div class="name">Scale-Out Fabric</div><div class="detail">Spectrum-X / Quantum-X800</div></div>
         </div>
       </div>
 
@@ -1110,7 +1126,7 @@ body {
         <div class="card">
           <div class="metric">72</div>
           <div class="metric-label">GPUs — NVL72</div>
-          <p style="margin-top:8px;">Single rack. Full NVLink 6 bandwidth. Holds most models in-memory. The standard building block.</p>
+          <p style="margin-top:8px;">Single rack. Full NVLink 6 bandwidth. Holds most models in-memory. The standard building block. QS: May 2026. HW PS: Jul 2026. MP: Aug 2026.</p>
         </div>
         <div class="card">
           <div class="metric">576</div>
@@ -1125,45 +1141,66 @@ body {
       </div>
     </div>
 
+    <!-- ==================== HGX RUBIN NVL8 ==================== -->
+    <div class="section" id="hgxvr">
+      <div class="section-header">
+        <h2>HGX Rubin NVL8</h2>
+        <p>The traditional 8-GPU server form factor with Vera CPUs — for enterprises that don't need the full NVL72 rack but still want next-gen Rubin performance.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><div class="value">8</div><div class="label">Rubin GPUs</div></div>
+        <div class="stat-box"><div class="value">2</div><div class="label">Vera CPUs</div></div>
+        <div class="stat-box"><div class="value">3 TB</div><div class="label">System Memory</div></div>
+        <div class="stat-box"><div class="value">Q4 2026</div><div class="label">Availability</div></div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🖥️</div>
+          <h3>Drop-in x86 Compatible</h3>
+          <p>Vera-based HGX Rubin is <strong>drop-in compatible</strong> with the existing Intel GNR x86 reference design. This means OEMs can reuse chassis, cooling, and motherboard designs — faster time to market.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <h3>Full PCIe Gen6</h3>
+          <p>2 CPU:8 GPU per node with <strong>full PCIe Gen6 x16 bandwidth</strong> between CPU and GPU. 8× 192GB LPDDR5 SOCAMM per socket for 3TB total system memory.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📐</div>
+          <h3>Full NVIDIA RA</h3>
+          <p>Leverage the full NVIDIA reference architecture for fast time to market. Same software stack (CUDA 13, Dynamo, NeMo) as the NVL72 rack.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: HGX NVL8 for the Enterprise Mid-Market</h4>
+        <p>The HGX Rubin NVL8 is the <strong>enterprise mid-market entry point</strong> for Vera Rubin. It's for organisations that need next-gen Rubin performance but can't justify a full NVL72 rack. The drop-in x86 compatibility means existing OEM partnerships and supply chains carry forward — lower risk, faster deployment. Target: enterprises building on-prem AI clusters of 2–16 servers (16–128 GPUs).</p>
+      </div>
+    </div>
+
     <!-- ==================== GROQ 3 ==================== -->
-    <div class="section" id="groq">
+    <div class="section" id="groq3">
       <div class="section-header">
         <h2>Groq 3 LPX</h2>
         <p>A codesigned deterministic inference processor — accelerating the decode phase of trillion-parameter models alongside Rubin GPUs.</p>
       </div>
 
       <div class="stat-row">
-        <div class="stat-box">
-          <div class="value">256</div>
-          <div class="label">LPU Processors / Rack</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">128 GB</div>
-          <div class="label">On-Chip SRAM</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">640 TB/s</div>
-          <div class="label">Scale-Up Bandwidth</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">35×</div>
-          <div class="label">Inference / MW</div>
-        </div>
-        <div class="stat-box">
-          <div class="value">10×</div>
-          <div class="label">Revenue Opportunity</div>
-        </div>
+        <div class="stat-box"><div class="value">256</div><div class="label">LPU Processors / Rack</div></div>
+        <div class="stat-box"><div class="value">128 GB</div><div class="label">On-Chip SRAM</div></div>
+        <div class="stat-box"><div class="value">640 TB/s</div><div class="label">Scale-Up Bandwidth</div></div>
+        <div class="stat-box"><div class="value">35×</div><div class="label">Inference / MW</div></div>
       </div>
 
-      <h3 style="font-size:16px;margin:24px 0 12px;">How LPX and Rubin Work Together</h3>
       <div class="callout info">
         <h4>🔑 Joint Decode: GPUs + LPUs Compute Every Token Together</h4>
-        <p>When deployed with Vera Rubin NVL72, <strong>Rubin GPUs and Groq LPUs jointly compute every layer of the AI model for every output token</strong>. This is not a separate inference cluster — it's a codesigned system where GPUs handle the parts they're best at (attention, MoE routing) and LPUs handle deterministic, low-latency decode. The result is far higher throughput per watt than either processor alone.</p>
+        <p>When deployed with Vera Rubin NVL72, <strong>Rubin GPUs and Groq LPUs jointly compute every layer of the AI model for every output token</strong>. This is not a separate inference cluster — it's a codesigned system where GPUs handle attention/MoE routing and LPUs handle deterministic, low-latency decode.</p>
       </div>
 
       <div class="callout">
         <h4>🎯 CTO Takeaway: Inference-Optimised SKU</h4>
-        <p>Groq 3 LPX rack is for <strong>ultra-premium inference</strong> — trillion-parameter models with million-token context. If your business is serving GPT-4-class or larger models at scale, the 35× throughput/MW improvement makes LPX a compelling addition. For smaller models or training-only workloads, the NVL72 rack alone is sufficient.</p>
+        <p>Groq 3 LPX rack is for <strong>ultra-premium inference</strong> — trillion-parameter models with million-token context. The 35× throughput/MW improvement makes LPX compelling. For smaller models or training-only workloads, the NVL72 rack alone is sufficient.</p>
       </div>
     </div>
 
@@ -1178,124 +1215,513 @@ body {
         <div class="card">
           <div class="card-icon">🔋</div>
           <h3>DSX Max-Q</h3>
-          <p>Dynamic power provisioning across the entire AI factory. Enables deploying <strong>30% more AI infrastructure</strong> within a fixed-power datacenter by dynamically shifting power between compute and cooling based on workload.</p>
+          <p>Dynamic power provisioning across the entire AI factory. Enables deploying <strong>30% more AI infrastructure</strong> within a fixed-power datacenter by dynamically shifting power between compute and cooling.</p>
         </div>
         <div class="card">
           <div class="card-icon">⚡</div>
           <h3>DSX Flex</h3>
-          <p>Makes AI factories <strong>grid-flexible assets</strong> — scaling power consumption up/down based on grid conditions. Nvidia claims this unlocks <strong>100 GW of stranded grid power</strong> worldwide. Critical for sites with variable renewable energy.</p>
+          <p>Makes AI factories <strong>grid-flexible assets</strong> — scaling power consumption up/down based on grid conditions. Unlocks <strong>100 GW of stranded grid power</strong> worldwide.</p>
         </div>
         <div class="card">
           <div class="card-icon">📐</div>
           <h3>AI Factory Reference Design</h3>
-          <p>A blueprint for codesigned AI infrastructure that maximises tokens per watt and overall goodput. Tightly integrates compute, networking, storage, power, and cooling — ensuring AI factories can scale reliably under continuous high-intensity workloads.</p>
+          <p>Blueprint for codesigned AI infrastructure that maximises tokens per watt. 200+ infrastructure partners building to the DSX specification.</p>
         </div>
       </div>
 
       <div class="callout">
         <h4>🎯 CTO Takeaway: Power is the Real Bottleneck</h4>
-        <p>GPU availability is no longer the constraint — <strong>power and cooling are</strong>. DSX Max-Q's 30% density improvement within fixed power is a big deal: it means you can fit 30% more compute into your existing power envelope without building new datacenters. DSX Flex's grid-flexible model is strategic for sites with renewable energy — run hard when wind/solar is abundant, throttle when it's not.</p>
+        <p>GPU availability is no longer the constraint — <strong>power and cooling are</strong>. DSX Max-Q's 30% density improvement means you can fit 30% more compute into your existing power envelope without building new datacenters. DSX Flex's grid-flexible model is strategic for sites with renewable energy.</p>
       </div>
-
-      <h3 style="font-size:16px;margin:24px 0 12px;">200+ Infrastructure Partners</h3>
-      <p style="font-size:13px;color:var(--text-secondary);">Nvidia is building DSX with 200+ datacenter infrastructure partners. This is not a proprietary woodoo — it's an industry reference architecture. Key partners include power distribution, cooling, cabling, and rack vendors who build to the DSX specification.</p>
     </div>
 
-    <!-- ==================== COMPARISON ==================== -->
-    <div class="section" id="comparison">
+    <!-- ==================== NETWORKING AT SCALE ==================== -->
+    <div class="section" id="networking">
       <div class="section-header">
-        <h2>Generational Comparison</h2>
-        <p>How Vera Rubin compares to Blackwell Ultra and AMD's upcoming MI400 — the three platforms competing for AI cloud infrastructure spend in 2026–2027.</p>
+        <h2>Networking at Scale</h2>
+        <p>Converged and dedicated network topologies from 1K to 16K GPUs — the common networking reference design for NCP deployments.</p>
       </div>
 
-      <div class="comparison-grid">
-        <div class="comparison-col">
-          <div class="comparison-header">
-            <div class="gen">Current Gen</div>
-            <div class="name">Blackwell Ultra</div>
-          </div>
-          <div class="comparison-body">
-            <div class="comparison-row"><span>GPU</span><span class="val">B300</span></div>
-            <div class="comparison-row"><span>NVL Domain</span><span class="val">72 GPUs</span></div>
-            <div class="comparison-row"><span>Interconnect</span><span class="val">NVLink 5</span></div>
-            <div class="comparison-row"><span>CPU</span><span class="val">Grace</span></div>
-            <div class="comparison-row"><span>NIC</span><span class="val">ConnectX-8</span></div>
-            <div class="comparison-row"><span>DPU</span><span class="val">BlueField-3</span></div>
-            <div class="comparison-row"><span>Networking</span><span class="val">Spectrum-4</span></div>
-            <div class="comparison-row"><span>Inference Accel</span><span class="val">None</span></div>
-            <div class="comparison-row"><span>KV Storage</span><span class="val">General-purpose</span></div>
-            <div class="comparison-row"><span>Cooling</span><span class="val">Liquid (required)</span></div>
-          </div>
-        </div>
+      <div class="callout info">
+        <h4>📋 Based on NCP Common Networking RD-11754-001-V4</h4>
+        <p>This reference design covers network architectures using <strong>BlueField-3 DPUs, SN5610 Ethernet switches, and SN2201 management switches</strong>. While documented for H100 GPUs as the architectural baseline, the topology patterns apply to all NCP deployments including GB300 and future Vera Rubin systems.</p>
+      </div>
 
-        <div class="comparison-col current">
-          <div class="comparison-header">
-            <div class="gen" style="color:var(--accent);">Next Gen</div>
-            <div class="name" style="color:var(--accent);">Vera Rubin</div>
-          </div>
-          <div class="comparison-body">
-            <div class="comparison-row"><span>GPU</span><span class="val highlight">Rubin</span></div>
-            <div class="comparison-row"><span>NVL Domain</span><span class="val">72 GPUs</span></div>
-            <div class="comparison-row"><span>Interconnect</span><span class="val highlight">NVLink 6</span></div>
-            <div class="comparison-row"><span>CPU</span><span class="val highlight">Vera (ARM)</span></div>
-            <div class="comparison-row"><span>NIC</span><span class="val highlight">ConnectX-9</span></div>
-            <div class="comparison-row"><span>DPU</span><span class="val highlight">BlueField-4</span></div>
-            <div class="comparison-row"><span>Networking</span><span class="val highlight">Spectrum-6</span></div>
-            <div class="comparison-row"><span>Inference Accel</span><span class="val highlight">Groq 3 LPX</span></div>
-            <div class="comparison-row"><span>KV Storage</span><span class="val highlight">STX (dedicated)</span></div>
-            <div class="comparison-row"><span>Cooling</span><span class="val">Liquid (required)</span></div>
-          </div>
-        </div>
+      <h3 style="font-size:16px;margin:24px 0 12px;">Scale Tiers</h3>
+      <table class="data-table">
+        <tr><th>GPU Scale</th><th>Topology</th><th>Key Design</th></tr>
+        <tr><td>1K – 4K GPUs</td><td class="mono">Two-tier</td><td>Single SU group, leaf-spine compute fabric</td></tr>
+        <tr><td>4K – 8K GPUs</td><td class="mono">Two-tier (converged)</td><td>Compute + HPS + in-band management combined</td></tr>
+        <tr><td>8K – 16K GPUs</td><td class="mono">Three-tier</td><td>8× SU groups with dedicated HPS and management fabrics</td></tr>
+      </table>
 
-        <div class="comparison-col">
-          <div class="comparison-header">
-            <div class="gen">Competitor</div>
-            <div class="name">AMD MI400</div>
-          </div>
-          <div class="comparison-body">
-            <div class="comparison-row"><span>GPU</span><span class="val">MI400</span></div>
-            <div class="comparison-row"><span>NVL Domain</span><span class="val">TBD (8–64)</span></div>
-            <div class="comparison-row"><span>Interconnect</span><span class="val">UALink 2.0</span></div>
-            <div class="comparison-row"><span>CPU</span><span class="val">Turin (x86)</span></div>
-            <div class="comparison-row"><span>NIC</span><span class="val">Pensando</span></div>
-            <div class="comparison-row"><span>DPU</span><span class="val">Pensando</span></div>
-            <div class="comparison-row"><span>Networking</span><span class="val">Broadcom/Ultra Ethernet</span></div>
-            <div class="comparison-row"><span>Inference Accel</span><span class="val">None announced</span></div>
-            <div class="comparison-row"><span>KV Storage</span><span class="val">General-purpose</span></div>
-            <div class="comparison-row"><span>Cooling</span><span class="val">Liquid (expected)</span></div>
-          </div>
+      <h3 style="font-size:16px;margin:24px 0 12px;">Converged vs Multi-Plane</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🔀</div>
+          <h3>Converged Network</h3>
+          <p>Compute, HPS storage, and in-band management share the same Ethernet fabric. Lower switch count (~40% fewer), simpler cabling, faster deployment. Use BlueField-3 DPU acceleration for traffic isolation. Ideal for NCP multi-tenant environments.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔗</div>
+          <h3>Multi-Plane (Dedicated)</h3>
+          <p>Separate physical networks for compute, HPS, and management. Maximum performance and isolation. Required for >8K GPU deployments with demanding HPS requirements. More switches, more cabling, but no contention between traffic classes.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Network Resiliency</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>EVPN-MH (Multihoming)</h3>
+          <p>Ethernet VPN Multihoming provides redundant host connectivity. If one leaf switch fails, traffic automatically reroutes via the alternate leaf. Standard for converged network deployments.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔀</div>
+          <h3>ECMP with BlueField DPU</h3>
+          <p>Hardware-accelerated Equal Cost Multi-Path routing. BlueField DPU mode enables line-rate ECMP without CPU overhead. Critical for large-scale training where all-reduce traffic must be load-balanced across multiple paths.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔗</div>
+          <h3>MLAG (Multi-Chassis LAG)</h3>
+          <p>Multi-Chassis Link Aggregation for redundant uplinks. Provides active-active connectivity to spine switches. Alternative to EVPN-MH for environments that prefer L2-based resiliency.</p>
         </div>
       </div>
 
       <div class="callout">
-        <h4>🎯 CTO Takeaway: Platform Lock-In vs Multi-Vendor</h4>
-        <p>Vera Rubin's biggest strength — deep codesign across 7 chips — is also its biggest risk: <strong>total Nvidia lock-in</strong>. AMD's MI400 + UALink + Ultra Ethernet Consortium approach offers multi-vendor interoperability but lacks the integration depth. Your decision comes down to: do you prioritise <strong>maximum tokens per watt</strong> (Vera Rubin) or <strong>supply chain resilience and multi-sourcing</strong> (AMD + UALink)? For most AI cloud companies, the answer is both — run Vera Rubin for latency-critical inference, AMD for training capacity diversification.</p>
+        <h4>🎯 CTO Takeaway: Start Converged, Go Multi-Plane at Scale</h4>
+        <p>For <4K GPUs, converged networking is simpler and cheaper. Beyond 8K GPUs, multi-plane becomes necessary to avoid contention. BlueField-3 DPU acceleration is the key enabler for converged networks — it provides hardware isolation between traffic classes without separate physical fabrics. Budget for BlueField-3 in DPU mode, not NIC mode.</p>
       </div>
     </div>
 
-    <!-- ==================== SOFTWARE ==================== -->
-    <div class="section" id="software">
+    <!-- ==================== INFINIBAND COMPUTE ==================== -->
+    <div class="section" id="ib">
       <div class="section-header">
-        <h2>Software Stack</h2>
-        <p>The full software ecosystem supporting Vera Rubin — from CUDA to containerised AI microservices.</p>
+        <h2>InfiniBand Compute Network</h2>
+        <p>Converged networking reference design for GB300 NVL72 with InfiniBand — an alternative to Spectrum-X Ethernet for maximum training performance.</p>
       </div>
 
+      <div class="callout info">
+        <h4>📋 Based on NVIS128 NCP RD RD-12477-001-V04</h4>
+        <p>This reference design covers converged networking for GB300 with <strong>InfiniBand compute fabric</strong>, combining compute, HPS, and in-band management into a single network — but using Quantum InfiniBand switches instead of Spectrum Ethernet.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Converged IB Network Components</h3>
       <table class="data-table">
-        <tr><th>Layer</th><th>Component</th><th>Role</th></tr>
-        <tr><td>Runtime</td><td class="mono">CUDA 13</td><td>Core GPU programming model. CUDA 13 adds Vera Rubin support and optimisations.</td></tr>
-        <tr><td>Inference</td><td class="mono">NVIDIA NIM</td><td>Containerised inference microservices. Optimised models for Rubin GPU. Production-grade deployment.</td></tr>
-        <tr><td>Orchestration</td><td class="mono">NVIDIA Dynamo</td><td>Disaggregated serving. Routes prefill to GPU, decode to LPX. Manages KV cache across STX.</td></tr>
-        <tr><td>Training</td><td class="mono">NVIDIA NeMo</td><td>End-to-end training framework. MoE support, distributed training, alignment.</td></tr>
-        <tr><td>Storage SDK</td><td class="mono">DOCA Memos</td><td>BlueField-4 storage framework. KV cache management. 5× inference throughput boost.</td></tr>
-        <tr><td>Networking</td><td class="mono">DOCA</td><td>Network programming for ConnectX-9 and BlueField-4. Offload acceleration.</td></tr>
-        <tr><td>Inference Kernel</td><td class="mono">TensorRT</td><td>Optimised inference kernels for Rubin GPU architecture.</td></tr>
-        <tr><td>Collectives</td><td class="mono">NCCL</td><td>GPU collective communications. NVLink 6 and Spectrum-X aware.</td></tr>
-        <tr><td>Observability</td><td class="mono">DCGM</td><td>GPU monitoring and management. Vera Rubin support.</td></tr>
+        <tr><th>Function</th><th>InfiniBand Component</th><th>Notes</th></tr>
+        <tr><td>Compute Fabric</td><td class="mono">Quantum-2 InfiniBand</td><td>NDR 400 Gb/s per port</td></tr>
+        <tr><td>Converged Traffic</td><td class="mono">Compute + HPS + In-Band Mgmt</td><td>All traffic on IB fabric</td></tr>
+        <tr><td>OOB Management</td><td class="mono">SN2201 (1GbE)</td><td>Separate Ethernet management</td></tr>
+        <tr><td>Host Connectivity</td><td class="mono">ConnectX-8 (IB mode)</td><td>Dual-port NDR</td></tr>
+        <tr><td>DPU</td><td class="mono">BlueField-3 (IB mode)</td><td>Storage and management offload</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Topology Options</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏗️</div>
+          <h3>Two-Tier</h3>
+          <p>Leaf-spine topology for up to ~4K GPUs. Simpler cabling, lower latency (2 hops max). Best for single-SU deployments.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏗️</div>
+          <h3>Three-Tier</h3>
+          <p>Leaf-spine-core topology for 4K–16K GPUs. Adds a core layer for east-west scaling across SU groups. Required for multi-SU deployments.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: IB for Training-Heavy Workloads</h4>
+        <p>InfiniBand's ultra-low latency and hardware-based congestion control make it ideal for training-heavy environments where every microsecond of all-reduce latency matters. However, the premium cost and specialist management requirements mean you should only choose IB if your workload profile demands it. For mixed training/inference, Spectrum-X is the better choice.</p>
+      </div>
+    </div>
+
+    <!-- ==================== ENTERPRISE RAG ==================== -->
+    <div class="section" id="rag">
+      <div class="section-header">
+        <h2>Enterprise RAG</h2>
+        <p>Retrieval-Augmented Generation deployment on Enterprise RA — the reference architecture for building production RAG systems with NVIDIA NIM microservices.</p>
+      </div>
+
+      <div class="callout info">
+        <h4>📋 Based on ERA-RAG-001 v2.0 (May 2026)</h4>
+        <p>The Enterprise RAG deployment guide covers RAG on <strong>Vanilla Kubernetes with Run:ai</strong> orchestration. It details the full pipeline from data ingestion to retrieval, using NVIDIA NIM microservices for model serving and Milvus for vector storage.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">RAG Architecture</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📥</div>
+          <h3>Ingestion Pipeline</h3>
+          <p>Document processing → embedding → vector DB indexing. Uses NVIDIA NIM microservices for embedding models. Supports PDF, DOCX, and other enterprise document formats. Parallelised for high-throughput ingestion.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <h3>Retrieval Pipeline</h3>
+          <p>User query → embedding → vector search → re-ranking → LLM generation. NIM microservices serve embedding and LLM models. Milvus distributed vector DB with GPU indexing for sub-second retrieval.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗄️</div>
+          <h3>Milvus Vector DB</h3>
+          <p>Distributed Milvus with GPU-accelerated indexing (cuVS). Supports MIG profiles and Run:ai GPU fractions for resource sharing. Data and index nodes scale independently.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Deployment Options</h3>
+      <table class="data-table">
+        <tr><th>Option</th><th>GPU Sharing</th><th>Best For</th></tr>
+        <tr><td>MIG Profiles</td><td class="mono">Hardware partitioning</td><td>Isolated workloads, predictable performance</td></tr>
+        <tr><td>Run:ai GPU Fractions</td><td class="mono">Software time-slicing</td><td>Higher utilisation, flexible scheduling</td></tr>
+        <tr><td>Dedicated GPUs</td><td class="mono">No sharing</td><td>Maximum performance, latency-critical</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Key Software Stack</h3>
+      <table class="data-table">
+        <tr><th>Component</th><th>Software</th><th>Role</th></tr>
+        <tr><td>LLM Serving</td><td class="mono">NVIDIA NIM</td><td>Containerised inference microservices</td></tr>
+        <tr><td>Embedding</td><td class="mono">NIM (embedding models)</td><td>Text-to-vector conversion</td></tr>
+        <tr><td>Vector DB</td><td class="mono">Milvus Distributed</td><td>GPU-accelerated vector search</td></tr>
+        <tr><td>Orchestration</td><td class="mono">Run:ai</td><td>GPU scheduling, MIG management</td></tr>
+        <tr><td>Retrieval Framework</td><td class="mono">NeMo Retriever</td><td>End-to-end RAG pipeline</td></tr>
+        <tr><td>Container Platform</td><td class="mono">Vanilla Kubernetes</td><td>Standard K8s, no vendor lock-in</td></tr>
       </table>
 
       <div class="callout">
-        <h4>🎯 CTO Takeaway: Dynamo is the Dark Horse</h4>
-        <p><strong>NVIDIA Dynamo</strong> is arguably the most strategically important piece of the Vera Rubin software stack. It's the orchestration layer that makes GPU+LPX+STX work as a single system — routing prefill to GPUs, decode to LPX, and KV cache to STX. Without Dynamo, you just have three separate hardware systems. With it, you have a codesigned inference supercomputer. Prioritise Dynamo evaluation and team training.</p>
+        <h4>🎯 CTO Takeaway: Start with MIG, Scale to Dedicated</h4>
+        <p>For initial RAG deployments, use <strong>MIG profiles</strong> to share GPUs between ingestion and retrieval pipelines — this reduces hardware requirements by 50%+ during development. In production, move retrieval to dedicated GPUs for consistent latency. Run:ai GPU fractions are ideal for bursty ingestion workloads where you need elastic GPU capacity.</p>
+      </div>
+    </div>
+
+    <!-- ==================== AI-Q RESEARCH AGENT ==================== -->
+    <div class="section" id="aiq">
+      <div class="section-header">
+        <h2>AI-Q Research Agent</h2>
+        <p>NVIDIA's Research Agent Blueprint — an agentic AI system that combines RAG with autonomous research capabilities for enterprise data.</p>
+      </div>
+
+      <div class="callout info">
+        <h4>📋 Based on ERA-DAS-004 v01 (February 2026)</h4>
+        <p>AI-Q shifts the paradigm from simple Q&A over documents to <strong>sophisticated, goal-oriented Agentic Workflows</strong>. An AI agent doesn't just retrieve information — it plans, searches, evaluates, and synthesises answers from both private enterprise data and public internet sources.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Architecture</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📥</div>
+          <h3>Data Ingestion & Preparation</h3>
+          <p>Enterprise documents (PDFs, DOCX, etc.) ingested via RAG pipeline. Vector embeddings stored in Milvus. Supports both structured and unstructured data.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <h3>RAG Framework</h3>
+          <p>NeMo Retriever for context-grounded retrieval. Hybrid search combining vector similarity and keyword matching. Supports multi-modal queries.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h3>AI-Q Instruct LLM</h3>
+          <p>Reasoning model that plans research steps, decomposes queries, and synthesises answers. Uses tool-calling to search external data sources.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Sizing & Performance</h3>
+      <div class="callout info">
+        <h4>📊 Key Benchmarking Results</h4>
+        <ul style="margin-top:8px;padding-left:20px;font-size:13px;color:var(--text-secondary);">
+          <li><strong>AI-Q scales linearly</strong> — throughput increases proportionally with GPU count</li>
+          <li><strong>Latency drops as systems scale</strong> — more GPUs = faster per-query response</li>
+          <li><strong>Reasoning model scale impacts latency</strong> — larger models need more compute per step</li>
+          <li>Use NeMo Agent Toolkit for benchmarking and sizing your specific workload</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: Budget for the Reasoning Overhead</h4>
+        <p>AI-Q's agentic approach means <strong>significantly more compute per query</strong> than simple RAG. Each query may trigger multiple retrieval steps, reasoning iterations, and tool calls. Budget 2–4× the GPU capacity compared to a simple RAG pipeline. Use the NeMo Agent Toolkit to benchmark your specific workload before committing to hardware.</p>
+      </div>
+    </div>
+
+    <!-- ==================== OPENSHELL ==================== -->
+    <div class="section" id="openshell">
+      <div class="section-header">
+        <h2>NVIDIA OpenShell & Autonomous Agents</h2>
+        <p>A secure runtime for autonomous AI agents — model-agnostic, zero-trust by default, with kernel-level enforcement.</p>
+      </div>
+
+      <div class="callout info">
+        <h4>📋 From Software & Solutions Roadmap, May 2026</h4>
+        <p>As AI agents become more autonomous, they need infrastructure-level security controls. <strong>NVIDIA OpenShell</strong> provides a trust boundary for every autonomous action, at any scale.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">The Agent Security Problem</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚠️</div>
+          <h3>Sensitive Data Exposure</h3>
+          <p>Live API keys held inside the agent. Any compromise leaks data.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚠️</div>
+          <h3>Prompt Injection</h3>
+          <p>Malicious input takes over — and the agent has full access to act on it.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚠️</div>
+          <h3>Unbounded Self-Evolution</h3>
+          <p>What the agent can do tomorrow is not what you authorised today.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚠️</div>
+          <h3>No Long-Run Governance</h3>
+          <p>Agents running for hours with no oversight, no audit trail, no approvals.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">OpenShell Design Principles</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h3>Out-of-Process Enforcement</h3>
+          <p>Constraints live on the environment the agent runs in — not inside the agent. The agent cannot bypass its own security policy.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚫</div>
+          <h3>Zero-Trust by Default</h3>
+          <p>Every agent starts with zero permissions. Every resource must be explicitly granted. No implicit access.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧱</div>
+          <h3>No Cross-Origin Access</h3>
+          <p>Agents cannot reach across sandbox boundaries without explicit policy. Kernel-level enforcement via Landlock.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Accelerated at Machine Speed</h3>
+          <p>SDG, cuVS, cuDS, memory primitives operate at machine speed. Security without performance penalty.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Get Started</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📦</div>
+          <h3>github.com/NVIDIA/OpenShell</h3>
+          <p>Open-source repository. Model-agnostic and harness-agnostic infrastructure. Runs anywhere: cloud, data center, edge, workstation.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <h3>docs.nvidia.com/openshell</h3>
+          <p>Full documentation. Deployment guides, policy configuration, and best practices for secure agent deployment.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: Security is the Enabler for Autonomous Agents</h4>
+        <p>You can't deploy autonomous agents at scale without infrastructure-level security. OpenShell's out-of-process enforcement model means <strong>security is not dependent on the agent's own code</strong> — even a compromised agent can't exceed its policy. This is the key enabler for production autonomous agent deployments. Start evaluating OpenShell now, before your teams start deploying agents without guardrails.</p>
+      </div>
+    </div>
+
+    <!-- ==================== NCP SOFTWARE ==================== -->
+    <div class="section" id="ncp-sw">
+      <div class="section-header">
+        <h2>NCP Software Reference Architecture</h2>
+        <p>The three-layer software stack for NVIDIA Cloud Partner deployments — Infrastructure-as-a-Service, Container-as-a-Service, and AI Platform-as-a-Service.</p>
+      </div>
+
+      <div class="callout info">
+        <h4>📋 Based on NCP Software Reference Guide (March 2026)</h4>
+        <p>The NCP Software Reference Architecture defines how NCP hosting providers build and operate their platforms, from bare-metal infrastructure to AI workloads.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Three Service Layers</h3>
+      <div class="arch-diagram">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-bottom:16px;">NCP Software Architecture</div>
+        <div class="arch-layer">
+          <div class="arch-block green">
+            <div class="name">AI Platform-as-a-Service</div>
+            <div class="detail">NIM · NeMo · TensorRT · AI-Q</div>
+          </div>
+        </div>
+        <div class="arch-connector">↕</div>
+        <div class="arch-layer">
+          <div class="arch-block blue">
+            <div class="name">Container-as-a-Service</div>
+            <div class="detail">K8s · GPU Operator · Run:ai · Helm</div>
+          </div>
+        </div>
+        <div class="arch-connector">↕</div>
+        <div class="arch-layer">
+          <div class="arch-block orange">
+            <div class="name">Infrastructure-as-a-Service</div>
+            <div class="detail">BCBM · UFM · NetQ · NVUE · BlueField</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">IaaS Layer — Key Components</h3>
+      <table class="data-table">
+        <tr><th>Component</th><th>Software</th><th>Role</th></tr>
+        <tr><td>Network Management</td><td class="mono">UFM + NVUE + NetQ</td><td>Fabric management, telemetry, validation</td></tr>
+        <tr><td>Compute Management</td><td class="mono">Base Command Manager</td><td>Bare-metal provisioning, monitoring</td></tr>
+        <tr><td>Storage Management</td><td class="mono">SDS Controller</td><td>Software-defined storage orchestration</td></tr>
+        <tr><td>Cluster Orchestration</td><td class="mono">BCBM + Slurm</td><td>Job scheduling, resource allocation</td></tr>
+        <tr><td>DPU Management</td><td class="mono">DOCA</td><td>BlueField lifecycle and offload programming</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">CaaS Layer — Key Components</h3>
+      <table class="data-table">
+        <tr><th>Component</th><th>Software</th><th>Role</th></tr>
+        <tr><td>Container Platform</td><td class="mono">Vanilla Kubernetes</td><td>Standard K8s deployment</td></tr>
+        <tr><td>GPU Operator</td><td class="mono">NVIDIA GPU Operator</td><td>Containerised GPU driver + toolkit</td></tr>
+        <tr><td>GPU Scheduling</td><td class="mono">Run:ai</td><td>MIG, time-slicing, fractions, queues</td></tr>
+        <tr><td>K8s Operators</td><td class="mono">NIM Operator, Network Operator</td><td>Automated deployment of NVIDIA services</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Break-Fix & Observability</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <h3>Break-Fix Architecture</h3>
+          <p>Standardised fault detection and replacement procedures. NVEX enterprise support. Component-level isolation for fast root cause analysis.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>Telemetry & Observability</h3>
+          <p>DCGM for GPU monitoring. NetQ for network validation. DCGM-Exporter for Kubernetes. Workload isolation with MIG and time-slicing.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔐</div>
+          <h3>Boot & Attestation</h3>
+          <p>Measured boot with hardware root of trust. Remote attestation for supply chain verification. Shared responsibility model between NCP and tenant.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: Build on Vanilla K8s</h4>
+        <p>The reference architecture explicitly recommends <strong>Vanilla Kubernetes</strong> — not a managed K8s service. This gives you full control over GPU scheduling (via Run:ai), network configuration (via UFM), and storage management. Avoid managed K8s services that abstract away GPU and network details — they often can't support MIG, GPU fractions, or Spectrum-X optimizations.</p>
+      </div>
+    </div>
+
+    <!-- ==================== RUN:AI ==================== -->
+    <div class="section" id="runai">
+      <div class="section-header">
+        <h2>Run:ai on Vanilla Kubernetes</h2>
+        <p>NVIDIA's software reference stack and automation for Enterprise RAs — deploying AI infrastructure on standard Kubernetes with Run:ai orchestration.</p>
+      </div>
+
+      <div class="callout info">
+        <h4>📋 Based on ERA-00018-002 v01 (March 2026)</h4>
+        <p>This reference architecture provides a <strong>streamlined and standardised framework</strong> for deploying vanilla Kubernetes for AI inference and machine learning, optimised for scalable AI workloads in enterprise environments.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Deployment Stack</h3>
+      <table class="data-table">
+        <tr><th>Layer</th><th>Component</th><th>Role</th></tr>
+        <tr><td>OS</td><td class="mono">Ubuntu 22.04 LTS</td><td>Base operating system</td></tr>
+        <tr><td>Container Runtime</td><td class="mono">containerd</td><td>Standard container runtime</td></tr>
+        <tr><td>Orchestration</td><td class="mono">Vanilla Kubernetes</td><td>No managed service dependency</td></tr>
+        <tr><td>GPU Management</td><td class="mono">NVIDIA GPU Operator</td><td>Driver, toolkit, container toolkit</td></tr>
+        <tr><td>GPU Scheduling</td><td class="mono">Run:ai</td><td>MIG, fractions, priorities, queues</td></tr>
+        <tr><td>Network</td><td class="mono">Spectrum-X + DOCA</td><td>High-performance networking</td></tr>
+        <tr><td>Storage</td><td class="mono">BlueField-3 DPU</td><td>Accelerated storage access</td></tr>
+        <tr><td>Monitoring</td><td class="mono">DCGM + NetQ + Prometheus</td><td>Full-stack observability</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Run:ai Key Features</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>GPU Fractions</h3>
+          <p>Time-slice GPUs across workloads. Allocate 0.5 GPU to a lightweight inference service and 1.5 GPUs to a training job. Maximise utilisation without MIG hardware constraints.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>Priority & Queues</h3>
+          <p>Define priority classes for workloads. Production inference preempts development training. Queue management for fair resource sharing across teams.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔄</div>
+          <h3>Automated MIG Management</h3>
+          <p>Dynamic MIG profile creation and deletion. No manual GPU partitioning — Run:ai applies MIG configs based on workload requirements at scheduling time.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: Run:ai is Your GPU Operating System</h4>
+        <p>Without Run:ai, Kubernetes treats GPUs as indivisible units — one GPU per container. Run:ai enables <strong>GPU sharing, preemption, and dynamic MIG</strong>, turning your GPU cluster from a static allocation into a dynamic resource pool. For any cluster with >8 GPUs, Run:ai typically improves GPU utilisation from 30–50% to 70–90%.</p>
+      </div>
+    </div>
+
+    <!-- ==================== ROADMAP & EOL ==================== -->
+    <div class="section" id="roadmap">
+      <div class="section-header">
+        <h2>Product Roadmap & EOL</h2>
+        <p>NVIDIA datacenter product lifecycle timelines — EOL schedules for current products and launch timelines for Vera Rubin.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Vera Rubin Launch Schedule</h3>
+      <table class="data-table">
+        <tr><th>Product</th><th>QS</th><th>HW PS</th><th>SW GA</th><th>MP</th><th>Launch</th></tr>
+        <tr><td>VR NVL72</td><td class="mono">May 2026</td><td class="mono">Jul 2026</td><td class="mono">Sep 2026</td><td class="mono">Aug 2026</td><td class="mono highlight">GTC 2025</td></tr>
+        <tr><td>VR NVL4</td><td class="mono">Jul 2026</td><td class="mono">Oct 2026</td><td class="mono">Oct 2026</td><td class="mono">Nov 2026</td><td class="mono">ISC 2026</td></tr>
+        <tr><td>HGX Rubin NVL8</td><td class="mono">Jul 2026</td><td class="mono">Aug 2026</td><td class="mono">Sep 2026</td><td class="mono">Aug 2026</td><td class="mono">GTC 2026</td></tr>
+        <tr><td>Vera (1S/2S)</td><td class="mono">Jun 2026</td><td class="mono">Jul 2026</td><td class="mono">Oct 2026</td><td class="mono">Aug 2026</td><td class="mono">GTC 2026</td></tr>
+        <tr><td>CMX Rack</td><td class="mono">TBD</td><td class="mono">Jul 2026</td><td class="mono">Feb 2027</td><td class="mono">TBD</td><td class="mono">GTC 2025</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">HGX EOL Timeline</h3>
+      <table class="data-table">
+        <tr><th>Product</th><th>EOL Notice</th><th>Last PO</th><th>Last Shipment</th></tr>
+        <tr><td>HGX H100 4-GPU</td><td class="mono">Jul 2025</td><td class="mono">Jan 2026</td><td class="mono">Jul 2026</td></tr>
+        <tr><td>H100 SXM5 80GB</td><td class="mono">Jul 2025</td><td class="mono">Jan 2026</td><td class="mono">Jul 2026</td></tr>
+        <tr><td>HGX H200 4-GPU</td><td class="mono">Sep 2025</td><td class="mono">Mar 2026</td><td class="mono">Sep 2026</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">PCIe GPU EOL Timeline</h3>
+      <table class="data-table">
+        <tr><th>Product</th><th>EOL Notice</th><th>Last PO</th><th>Last Shipment</th></tr>
+        <tr><td>H100 NVL</td><td class="mono">May 2025</td><td class="mono">Nov 2025</td><td class="mono">May 2026</td></tr>
+        <tr><td>L40</td><td class="mono">May 2025</td><td class="mono">Nov 2025</td><td class="mono">May 2026</td></tr>
+        <tr><td>A10</td><td class="mono">Jan 2026</td><td class="mono">Jul 2026</td><td class="mono">Jan 2027</td></tr>
+        <tr><td>A16</td><td class="mono">Apr 2026</td><td class="mono">Oct 2026</td><td class="mono">Apr 2027</td></tr>
+      </table>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Grace / GH200 EOL Timeline</h3>
+      <table class="data-table">
+        <tr><th>Product</th><th>EOL Notice</th><th>Last PO</th><th>Last Shipment</th></tr>
+        <tr><td>GH200 CG1-120-96GB (12V)</td><td class="mono">Aug 2025</td><td class="mono">Feb 2026</td><td class="mono">Aug 2026</td></tr>
+        <tr><td>Grace C2-240GB</td><td class="mono">Aug 2025</td><td class="mono">Feb 2026</td><td class="mono">Aug 2026</td></tr>
+        <tr><td>Grace C2-960GB</td><td class="mono">Mar 2026</td><td class="mono">Jun 2026</td><td class="mono">Mar 2027</td></tr>
+      </table>
+
+      <div class="callout warning">
+        <h4>⚠️ Plan Your Refresh Cycles</h4>
+        <p>H100 and L40 shipments end <strong>May 2026</strong>. HGX H200 ends <strong>Sep 2026</strong>. Grace C2 ends <strong>Mar 2027</strong>. CUDA + Tesla Driver support continues for <strong>Last Shipment + 3 years</strong>. If you're still running H100/A100 infrastructure, now is the time to plan your migration to B300 or VR.</p>
+      </div>
+    </div>
+
+    <!-- ==================== LIQUID COOLING ==================== -->
+    <div class="section" id="cooling">
+      <div class="section-header">
+        <h2>Liquid Cooling</h2>
+        <p>Direct liquid cooling specifications for NVIDIA datacenter infrastructure — switch P-Q curves and cooling requirements.</p>
+      </div>
+
+      <div class="callout info">
+        <h4>📋 Based on SN6xxx Liquid-Cooled Switch Systems P-Q Curves (May 2025)</h4>
+        <p>NVIDIA provides Pressure-Flow (P-Q) curves for liquid-cooled switch systems to help datacenter engineers design cooling loops that meet the required flow rates and pressure drops.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:24px 0 12px;">Liquid-Cooled Switch Models</h3>
+      <table class="data-table">
+        <tr><th>Switch</th><th>Type</th><th>Cooling</th></tr>
+        <tr><td>SN6600-LD</td><td class="mono">Spectrum-4 Ethernet</td><td>Liquid-cooled variant</td></tr>
+        <tr><td>SN6810-LD</td><td class="mono">Spectrum-4 Ethernet</td><td>Liquid-cooled variant</td></tr>
+        <tr><td>SN6800-LD</td><td class="mono">Spectrum-4 Ethernet</td><td>Liquid-cooled variant</td></tr>
+      </table>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: DLC is Non-Negotiable</h4>
+        <p>Both GB300 NVL72 and Vera Rubin NVL72 <strong>require direct liquid cooling</strong>. Air-cooled designs cannot handle the thermal density. Plan your facility water loops for 25–35°C supply temperature. The SN6xxx liquid-cooled switches also need DLC — factor them into your cooling loop design alongside the GPU racks.</p>
       </div>
     </div>
 
@@ -1303,7 +1729,7 @@ body {
     <div class="section" id="procurement">
       <div class="section-header">
         <h2>Procurement Planning</h2>
-        <p>What an AI cloud company needs to know before committing to Vera Rubin — timelines, pricing signals, and infrastructure prerequisites.</p>
+        <p>What an AI cloud company needs to know before committing to NVIDIA infrastructure — timelines, pricing signals, and infrastructure prerequisites.</p>
       </div>
 
       <h3 style="font-size:16px;margin:24px 0 12px;">Timeline</h3>
@@ -1321,7 +1747,12 @@ body {
         <div class="timeline-item">
           <div class="date">H2 2026</div>
           <h4>Production Availability</h4>
-          <p>Vera Rubin-based products available from cloud providers and system makers. First customer deployments expected.</p>
+          <p>Vera Rubin NVL72 available Aug 2026. HGX Rubin NVL8 available Aug 2026. Vera standalone CPUs available Aug 2026. First customer deployments.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="date">Q4 2026</div>
+          <h4>HGX Rubin NVL8 Launch</h4>
+          <p>Vera-based HGX NVL8 servers. Drop-in compatible with Intel GNR x86 reference design. Enterprise mid-market entry point.</p>
         </div>
         <div class="timeline-item">
           <div class="date">2027</div>
@@ -1347,9 +1778,9 @@ body {
       <h3 style="font-size:16px;margin:24px 0 12px;">Infrastructure Prerequisites</h3>
       <table class="data-table">
         <tr><th>Requirement</th><th>Specification</th><th>Notes</th></tr>
-        <tr><td>Power</td><td class="mono">~120 kW per NVL72 rack</td><td>Estimate based on Blackwell NVL72 scaling. Requires 480V three-phase.</td></tr>
+        <tr><td>Power</td><td class="mono">~120 kW per NVL72 rack</td><td>Estimate based on Blackwell scaling. Requires 480V three-phase.</td></tr>
         <tr><td>Cooling</td><td class="mono">Direct liquid cooling (DLC)</td><td>Mandatory. Facility water loop at 25–35°C supply.</td></tr>
-        <tr><td>Floor Space</td><td class="mono">Standard 19" rack footprint</td><td>NVL72 is a single rack. Plan for 5 racks minimum per POD.</td></tr>
+        <tr><td>Floor Space</td><td class="mono">Standard 19" rack footprint</td><td>Plan for 5 racks minimum per POD.</td></tr>
         <tr><td>Network</td><td class="mono">400/800G fabric</td><td>Spectrum-X or Quantum-X800. CPO optics for density.</td></tr>
         <tr><td>Software</td><td class="mono">CUDA 13 + Dynamo</td><td>Required for Rubin support. Plan migration from CUDA 12.</td></tr>
         <tr><td>Staff</td><td class="mono">ARM + DLC expertise</td><td>Deviate from x86 tooling. DLC ops are different from air cooling.</td></tr>
@@ -1366,11 +1797,86 @@ body {
           <li>Establish GPU+LPX co-scheduling proof-of-concept with Dynamo</li>
         </ol>
       </div>
+    </div>
+
+    <!-- ==================== GEN COMPARISON ==================== -->
+    <div class="section" id="comparison">
+      <div class="section-header">
+        <h2>Generational Comparison</h2>
+        <p>How Vera Rubin compares to Blackwell Ultra and AMD's upcoming MI400 — the three platforms competing for AI cloud infrastructure spend in 2026–2027.</p>
+      </div>
+
+      <div class="comparison-grid">
+        <div class="comparison-col">
+          <div class="comparison-header">
+            <div class="gen">Current Gen</div>
+            <div class="name">Blackwell Ultra</div>
+          </div>
+          <div class="comparison-body">
+            <div class="comparison-row"><span>GPU</span><span class="val">B300</span></div>
+            <div class="comparison-row"><span>NVL Domain</span><span class="val">72 GPUs</span></div>
+            <div class="comparison-row"><span>Interconnect</span><span class="val">NVLink 5</span></div>
+            <div class="comparison-row"><span>CPU</span><span class="val">Grace</span></div>
+            <div class="comparison-row"><span>System Mem</span><span class="val">512 GB / CPU</span></div>
+            <div class="comparison-row"><span>NIC</span><span class="val">ConnectX-8</span></div>
+            <div class="comparison-row"><span>DPU</span><span class="val">BlueField-3</span></div>
+            <div class="comparison-row"><span>Networking</span><span class="val">Spectrum-4</span></div>
+            <div class="comparison-row"><span>Inference Accel</span><span class="val">None</span></div>
+            <div class="comparison-row"><span>KV Storage</span><span class="val">General-purpose</span></div>
+            <div class="comparison-row"><span>Cooling</span><span class="val">Liquid (required)</span></div>
+          </div>
+        </div>
+
+        <div class="comparison-col current">
+          <div class="comparison-header">
+            <div class="gen" style="color:var(--accent);">Next Gen</div>
+            <div class="name" style="color:var(--accent);">Vera Rubin</div>
+          </div>
+          <div class="comparison-body">
+            <div class="comparison-row"><span>GPU</span><span class="val highlight">Rubin</span></div>
+            <div class="comparison-row"><span>NVL Domain</span><span class="val">72 GPUs</span></div>
+            <div class="comparison-row"><span>Interconnect</span><span class="val highlight">NVLink 6</span></div>
+            <div class="comparison-row"><span>CPU</span><span class="val highlight">Vera (ARM)</span></div>
+            <div class="comparison-row"><span>System Mem</span><span class="val highlight">768 GB / CPU</span></div>
+            <div class="comparison-row"><span>NIC</span><span class="val highlight">ConnectX-9</span></div>
+            <div class="comparison-row"><span>DPU</span><span class="val highlight">BlueField-4</span></div>
+            <div class="comparison-row"><span>Networking</span><span class="val highlight">Spectrum-6</span></div>
+            <div class="comparison-row"><span>Inference Accel</span><span class="val highlight">Groq 3 LPX</span></div>
+            <div class="comparison-row"><span>KV Storage</span><span class="val highlight">STX (dedicated)</span></div>
+            <div class="comparison-row"><span>Cooling</span><span class="val">Liquid (required)</span></div>
+          </div>
+        </div>
+
+        <div class="comparison-col">
+          <div class="comparison-header">
+            <div class="gen">Competitor</div>
+            <div class="name">AMD MI400</div>
+          </div>
+          <div class="comparison-body">
+            <div class="comparison-row"><span>GPU</span><span class="val">MI400</span></div>
+            <div class="comparison-row"><span>NVL Domain</span><span class="val">TBD (8–64)</span></div>
+            <div class="comparison-row"><span>Interconnect</span><span class="val">UALink 2.0</span></div>
+            <div class="comparison-row"><span>CPU</span><span class="val">Turin (x86)</span></div>
+            <div class="comparison-row"><span>System Mem</span><span class="val">TBD</span></div>
+            <div class="comparison-row"><span>NIC</span><span class="val">Pensando</span></div>
+            <div class="comparison-row"><span>DPU</span><span class="val">Pensando</span></div>
+            <div class="comparison-row"><span>Networking</span><span class="val">Ultra Ethernet</span></div>
+            <div class="comparison-row"><span>Inference Accel</span><span class="val">None announced</span></div>
+            <div class="comparison-row"><span>KV Storage</span><span class="val">General-purpose</span></div>
+            <div class="comparison-row"><span>Cooling</span><span class="val">Liquid (expected)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>🎯 CTO Takeaway: Platform Lock-In vs Multi-Vendor</h4>
+        <p>Vera Rubin's biggest strength — deep codesign across 7 chips — is also its biggest risk: <strong>total Nvidia lock-in</strong>. AMD's MI400 + UALink + Ultra Ethernet Consortium approach offers multi-vendor interoperability but lacks the integration depth. Your decision comes down to: do you prioritise <strong>maximum tokens per watt</strong> (Vera Rubin) or <strong>supply chain resilience and multi-sourcing</strong> (AMD + UALink)? For most AI cloud companies, the answer is both — run Vera Rubin for latency-critical inference, AMD for training capacity diversification.</p>
+      </div>
 
       <div class="footer">
-        <p>Based on NVIDIA GTC 2025/2026 announcements, press releases, and public specifications.<br>
+        <p>Based on NVIDIA GTC 2025/2026 announcements, press releases, public specifications, and Enterprise/NCP Reference Architecture documents.<br>
         Last updated: June 2026. Some specifications are estimates or based on announced but not fully disclosed data.<br>
-        NVIDIA, Vera, Rubin, NVLink, ConnectX, BlueField, Spectrum, and Groq are trademarks of NVIDIA Corporation.</p>
+        NVIDIA, Vera, Rubin, NVLink, ConnectX, BlueField, Spectrum, Groq, OpenShell, and Run:ai are trademarks of NVIDIA Corporation.</p>
       </div>
     </div>
 
@@ -1383,18 +1889,13 @@ document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', () => {
     const sectionId = item.dataset.section;
 
-    // Update nav
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     item.classList.add('active');
 
-    // Update section
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(sectionId).classList.add('active');
 
-    // Close mobile sidebar
     document.querySelector('.sidebar').classList.remove('open');
-
-    // Scroll to top
     window.scrollTo(0, 0);
   });
 });
@@ -1411,7 +1912,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Search functionality
+// Search
 document.addEventListener('keydown', (e) => {
   if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
     e.preventDefault();
