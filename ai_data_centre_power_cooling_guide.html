@@ -1,0 +1,949 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Data Centre Power and Cooling Guide</title>
+<style>
+:root {
+  --artifact-bg: var(--theme-background, #ffffff);
+  --artifact-surface: var(--theme-background-light, #f7f8fa);
+  --artifact-surface-2: var(--theme-background-mid, #eef1f5);
+  --artifact-text: var(--theme-text-primary, #18202a);
+  --artifact-muted: var(--theme-text-secondary, #596575);
+  --artifact-border: var(--theme-border-light, #d8dee8);
+  --artifact-primary: var(--theme-primary-highlight, #006bbd);
+  --artifact-primary-hover: var(--theme-primary-hover, #00579b);
+  --artifact-selected: var(--theme-selected, #e7f1fb);
+  --artifact-good: #107c41;
+  --artifact-warn: #b35c00;
+  --artifact-risk: #b42318;
+  --artifact-blue-soft: #e7f1fb;
+  --artifact-green-soft: #eaf7ef;
+  --artifact-amber-soft: #fff4df;
+  --artifact-red-soft: #ffefec;
+  --artifact-shadow: rgba(24,32,42,0.10);
+  --power: #0b63ce;
+  --cool: #0f8b8d;
+  --heat: #d64b2a;
+}
+html[data-theme="dark"] {
+  --artifact-good: #5fd18a;
+  --artifact-warn: #ffbd5a;
+  --artifact-risk: #ff8a7a;
+  --artifact-blue-soft: var(--theme-selected, #183247);
+  --artifact-green-soft: #183528;
+  --artifact-amber-soft: #3b2d16;
+  --artifact-red-soft: #3a201f;
+  --artifact-shadow: rgba(0,0,0,0.35);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--artifact-bg);
+  color: var(--artifact-text);
+  line-height: 1.45;
+}
+.wrapper {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 22px;
+}
+.hero-card, .panel, .mini-card {
+  background: var(--artifact-surface);
+  border: 1px solid var(--artifact-border);
+  border-radius: 22px;
+  box-shadow: 0 10px 30px var(--artifact-shadow);
+}
+.hero-card { padding: 32px; }
+.kicker {
+  color: var(--artifact-primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: clamp(32px, 5vw, 58px);
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+  margin: 12px 0 16px;
+}
+h2 {
+  font-size: 26px;
+  line-height: 1.1;
+  margin: 0 0 14px;
+  letter-spacing: -0.025em;
+}
+h3 {
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+p { margin: 0 0 12px; }
+.lead {
+  font-size: 18px;
+  color: var(--artifact-muted);
+  max-width: 70ch;
+}
+.hero-side {
+  padding: 24px;
+  display: grid;
+  gap: 14px;
+}
+.metric {
+  background: var(--artifact-bg);
+  border: 1px solid var(--artifact-border);
+  border-radius: 18px;
+  padding: 18px;
+}
+.metric .num {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+.metric .label {
+  color: var(--artifact-muted);
+  font-size: 13px;
+}
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 12px 0 18px;
+  background: var(--artifact-bg);
+}
+.nav button, .export-btn {
+  border: 1px solid var(--artifact-border);
+  background: var(--artifact-surface);
+  color: var(--artifact-text);
+  border-radius: 999px;
+  padding: 9px 13px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.nav button:hover, .export-btn:hover { transform: translateY(-1px); border-color: var(--artifact-primary); }
+.nav button.active {
+  background: var(--artifact-selected);
+  border-color: var(--artifact-primary);
+  color: var(--artifact-primary);
+}
+.section {
+  display: none;
+  animation: fadeIn 0.28s ease both;
+}
+.section.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.grid {
+  display: grid;
+  gap: 16px;
+}
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.panel {
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.mini-card {
+  padding: 18px;
+  box-shadow: none;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--artifact-selected);
+  color: var(--artifact-primary);
+  margin-bottom: 10px;
+}
+.formula {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  background: var(--artifact-bg);
+  border: 1px solid var(--artifact-border);
+  border-radius: 18px;
+  padding: 18px;
+  margin: 14px 0;
+}
+.formula .box {
+  padding: 14px;
+  background: var(--artifact-surface);
+  border-radius: 14px;
+  text-align: center;
+  font-weight: 700;
+}
+.formula .op { color: var(--artifact-muted); font-weight: 800; }
+.calc {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 18px;
+  align-items: stretch;
+}
+.inputs {
+  display: grid;
+  gap: 12px;
+}
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--artifact-muted);
+}
+input, select {
+  width: 100%;
+  border: 1px solid var(--artifact-border);
+  border-radius: 12px;
+  background: var(--artifact-bg);
+  color: var(--artifact-text);
+  padding: 12px;
+  font: inherit;
+}
+.results {
+  display: grid;
+  gap: 12px;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--artifact-border);
+}
+.result-row:last-child { border-bottom: 0; }
+.result-row strong { font-size: 22px; letter-spacing: -0.025em; }
+.note {
+  color: var(--artifact-muted);
+  font-size: 13px;
+}
+.path {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.path-card {
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid var(--artifact-border);
+  background: var(--artifact-bg);
+  position: relative;
+}
+.path-card::before {
+  content: "";
+  display: block;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--artifact-primary);
+  margin-bottom: 12px;
+}
+.path-card.good::before { background: var(--artifact-good); }
+.path-card.warn::before { background: var(--artifact-warn); }
+.path-card.risk::before { background: var(--artifact-risk); }
+.decision {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+}
+.decision-tabs {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.decision-tabs button {
+  text-align: left;
+  border: 1px solid var(--artifact-border);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--artifact-surface);
+  color: var(--artifact-text);
+  cursor: pointer;
+}
+.decision-tabs button.active {
+  background: var(--artifact-selected);
+  border-color: var(--artifact-primary);
+}
+.decision-content {
+  background: var(--artifact-bg);
+  border: 1px solid var(--artifact-border);
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 330px;
+}
+.flow {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 40px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+.flow-node {
+  background: var(--artifact-bg);
+  border: 1px solid var(--artifact-border);
+  border-radius: 18px;
+  padding: 18px;
+  min-height: 130px;
+}
+.arrow {
+  text-align: center;
+  color: var(--artifact-primary);
+  font-size: 28px;
+  font-weight: 800;
+}
+.checklist {
+  display: grid;
+  gap: 10px;
+}
+.check {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.tick {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--artifact-selected);
+  border: 1px solid var(--artifact-primary);
+  display: grid;
+  place-items: center;
+  color: var(--artifact-primary);
+  font-size: 14px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--artifact-bg);
+  border-radius: 16px;
+  overflow: hidden;
+}
+th, td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid var(--artifact-border);
+  vertical-align: top;
+}
+th {
+  color: var(--artifact-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--artifact-surface-2);
+}
+td { font-size: 14px; }
+.tag {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: var(--artifact-selected);
+  color: var(--artifact-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+.diagram-wrap {
+  background: var(--artifact-bg);
+  border: 1px solid var(--artifact-border);
+  border-radius: 20px;
+  padding: 14px;
+  overflow-x: auto;
+}
+.dc-diagram {
+  width: 100%;
+  min-width: 900px;
+  height: auto;
+  display: block;
+}
+.diagram-title {
+  font-size: 24px;
+  font-weight: 800;
+  fill: var(--artifact-text);
+}
+.diagram-subtitle {
+  font-size: 13px;
+  fill: var(--artifact-muted);
+}
+.diagram-box {
+  fill: var(--artifact-surface);
+  stroke: var(--artifact-border);
+  stroke-width: 1.5;
+}
+.diagram-box-utility { fill: var(--artifact-blue-soft); stroke: var(--power); }
+.diagram-box-cooling { fill: #e8f7f7; stroke: var(--cool); }
+.diagram-box-heat { fill: #fff0eb; stroke: var(--heat); }
+.diagram-label {
+  font-size: 14px;
+  font-weight: 800;
+  fill: var(--artifact-text);
+}
+.diagram-small {
+  font-size: 11.5px;
+  fill: var(--artifact-muted);
+}
+.diagram-micro {
+  font-size: 10.5px;
+  fill: var(--artifact-muted);
+}
+.diagram-power {
+  stroke: var(--power);
+  stroke-width: 3;
+  fill: none;
+  marker-end: url(#arrowPower);
+}
+.diagram-cool {
+  stroke: var(--cool);
+  stroke-width: 3;
+  fill: none;
+  marker-end: url(#arrowCool);
+}
+.diagram-heat {
+  stroke: var(--heat);
+  stroke-width: 3;
+  stroke-dasharray: 7 5;
+  fill: none;
+  marker-end: url(#arrowHeat);
+}
+.legend {
+  font-size: 12px;
+  fill: var(--artifact-muted);
+}
+.footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.export-btn {
+  background: var(--artifact-primary);
+  color: var(--theme-background, #ffffff);
+  border-color: var(--artifact-primary);
+}
+@media (max-width: 860px) {
+  .hero, .calc, .grid.two, .grid.three, .decision, .path { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: 1fr; }
+  .arrow { transform: rotate(90deg); }
+}
+@media print {
+  body { background: #fff; color: #111; }
+  .nav, .footer-actions, button { display: none !important; }
+  .wrapper { max-width: none; padding: 20px; }
+  .section { display: block !important; break-inside: auto; }
+  .hero, .panel, .mini-card, .metric, .path-card, .flow-node, .decision-content {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  .hero, .grid.two, .grid.three, .calc, .decision, .path, .flow {
+    grid-template-columns: 1fr !important;
+  }
+  .arrow { display: none; }
+  .diagram-wrap { overflow: visible; }
+  .dc-diagram { min-width: 0; }
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <section class="hero">
+    <div class="hero-card">
+      <div class="kicker">CTO guide · AI-ready data centre infrastructure</div>
+      <h1>Power and cooling now define the AI platform.</h1>
+      <p class="lead">AI infrastructure design has moved from “how many GPUs?” to “how many sustainable kilowatts per rack can the site support, remove, monitor and grow?” This guide gives a practical framework for sizing IT load, translating it to grid power, understanding PUE, and choosing the right cooling architecture.</p>
+    </div>
+    <div class="hero-side hero-card">
+      <div class="metric"><div class="num">PUE</div><div class="label">Total facility energy ÷ IT equipment energy</div></div>
+      <div class="metric"><div class="num">kW/rack</div><div class="label">The design constraint for AI density, not just floor space</div></div>
+      <div class="metric"><div class="num">DLC</div><div class="label">Direct liquid cooling for high-density GPU and accelerator heat</div></div>
+    </div>
+  </section>
+
+  <nav class="nav" aria-label="Report navigation">
+    <button class="active" data-section="exec">Executive view</button>
+    <button data-section="power">Power sizing</button>
+    <button data-section="cooling">Cooling choices</button>
+    <button data-section="loops">Primary and secondary loops</button>
+    <button data-section="dell">Dell relevance</button>
+    <button data-section="readiness">Readiness checklist</button>
+  </nav>
+
+  <main>
+    <section id="exec" class="section active">
+      <div class="panel">
+        <span class="badge">What matters most</span>
+        <h2>Start with power, then decide how to remove heat.</h2>
+        <div class="grid three">
+          <div class="mini-card">
+            <h3>1. Size the IT load</h3>
+            <p>Build the demand model from servers, GPUs, storage, networking, management nodes and realistic utilisation. For AI clusters, GPU thermal design power and concurrency drive the rack plan.</p>
+          </div>
+          <div class="mini-card">
+            <h3>2. Convert IT load to grid load</h3>
+            <p>Grid power is not the same as IT power. Grid power must include cooling, UPS losses, electrical distribution, pumps, lighting and other facility overheads through PUE.</p>
+          </div>
+          <div class="mini-card">
+            <h3>3. Select the cooling envelope</h3>
+            <p>Air remains valid at lower rack densities. Hybrid and rear-door heat exchange extend existing sites. Direct liquid cooling and immersion support the highest AI densities.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <span class="badge">Distribution diagram</span>
+        <h2>How power and cooling move through an AI data centre</h2>
+        <p class="note">Cleaned-up diagram with larger spacing, shorter labels and separate lanes for electrical power, cooling supply and heat return.</p>
+        <div class="diagram-wrap" role="img" aria-label="Diagram showing utility power distribution, IT rack power delivery, and cooling loops in an AI data centre">
+          <svg class="dc-diagram" viewBox="0 0 1160 640" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrowPower" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#0b63ce"></path>
+              </marker>
+              <marker id="arrowCool" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#0f8b8d"></path>
+              </marker>
+              <marker id="arrowHeat" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#d64b2a"></path>
+              </marker>
+            </defs>
+
+            <text x="30" y="38" class="diagram-title">Power and cooling distribution for AI infrastructure</text>
+            <text x="30" y="62" class="diagram-subtitle">Electrical path feeds IT load; cooling path removes heat from racks through air, rear-door heat exchange, direct liquid cooling or immersion.</text>
+
+            <rect x="30" y="95" width="150" height="78" rx="16" class="diagram-box diagram-box-utility"></rect>
+            <text x="105" y="126" text-anchor="middle" class="diagram-label">Utility / Grid</text>
+            <text x="105" y="148" text-anchor="middle" class="diagram-small">Incoming MW</text>
+
+            <rect x="220" y="95" width="150" height="78" rx="16" class="diagram-box diagram-box-utility"></rect>
+            <text x="295" y="121" text-anchor="middle" class="diagram-label">Switchgear</text>
+            <text x="295" y="142" text-anchor="middle" class="diagram-small">Protection</text>
+            <text x="295" y="158" text-anchor="middle" class="diagram-small">and metering</text>
+
+            <rect x="410" y="95" width="150" height="78" rx="16" class="diagram-box diagram-box-utility"></rect>
+            <text x="485" y="121" text-anchor="middle" class="diagram-label">UPS</text>
+            <text x="485" y="142" text-anchor="middle" class="diagram-small">Battery backup</text>
+            <text x="485" y="158" text-anchor="middle" class="diagram-small">and conditioning</text>
+
+            <rect x="600" y="95" width="150" height="78" rx="16" class="diagram-box diagram-box-utility"></rect>
+            <text x="675" y="121" text-anchor="middle" class="diagram-label">PDU / Busway</text>
+            <text x="675" y="142" text-anchor="middle" class="diagram-small">Power to rows</text>
+            <text x="675" y="158" text-anchor="middle" class="diagram-small">and racks</text>
+
+            <rect x="800" y="82" width="310" height="104" rx="18" class="diagram-box"></rect>
+            <text x="955" y="113" text-anchor="middle" class="diagram-label">AI IT Load</text>
+            <text x="955" y="137" text-anchor="middle" class="diagram-small">GPU servers · storage · networking</text>
+            <text x="955" y="157" text-anchor="middle" class="diagram-micro">This is the denominator in PUE.</text>
+
+            <path d="M180 134 H220" class="diagram-power"></path>
+            <path d="M370 134 H410" class="diagram-power"></path>
+            <path d="M560 134 H600" class="diagram-power"></path>
+            <path d="M750 134 H800" class="diagram-power"></path>
+
+            <rect x="40" y="230" width="180" height="82" rx="16" class="diagram-box diagram-box-cooling"></rect>
+            <text x="130" y="260" text-anchor="middle" class="diagram-label">Heat Rejection</text>
+            <text x="130" y="282" text-anchor="middle" class="diagram-small">Chiller, dry cooler</text>
+            <text x="130" y="299" text-anchor="middle" class="diagram-small">or cooling tower</text>
+
+            <rect x="280" y="230" width="180" height="82" rx="16" class="diagram-box diagram-box-cooling"></rect>
+            <text x="370" y="260" text-anchor="middle" class="diagram-label">Primary Loop</text>
+            <text x="370" y="282" text-anchor="middle" class="diagram-small">Facility water</text>
+            <text x="370" y="299" text-anchor="middle" class="diagram-small">to CDU / RDHx</text>
+
+            <rect x="520" y="230" width="180" height="82" rx="16" class="diagram-box diagram-box-cooling"></rect>
+            <text x="610" y="260" text-anchor="middle" class="diagram-label">CDU / HX</text>
+            <text x="610" y="282" text-anchor="middle" class="diagram-small">Separates facility</text>
+            <text x="610" y="299" text-anchor="middle" class="diagram-small">and IT coolant</text>
+
+            <rect x="760" y="230" width="180" height="82" rx="16" class="diagram-box diagram-box-cooling"></rect>
+            <text x="850" y="260" text-anchor="middle" class="diagram-label">Secondary Loop</text>
+            <text x="850" y="282" text-anchor="middle" class="diagram-small">Coolant to rack</text>
+            <text x="850" y="299" text-anchor="middle" class="diagram-small">manifolds</text>
+
+            <rect x="990" y="230" width="130" height="82" rx="16" class="diagram-box diagram-box-cooling"></rect>
+            <text x="1055" y="260" text-anchor="middle" class="diagram-label">Cold Plates</text>
+            <text x="1055" y="282" text-anchor="middle" class="diagram-small">CPU / GPU</text>
+            <text x="1055" y="299" text-anchor="middle" class="diagram-small">heat capture</text>
+
+            <path d="M220 271 H280" class="diagram-cool"></path>
+            <path d="M460 271 H520" class="diagram-cool"></path>
+            <path d="M700 271 H760" class="diagram-cool"></path>
+            <path d="M940 271 H990" class="diagram-cool"></path>
+            <path d="M1055 230 V186" class="diagram-cool"></path>
+
+            <rect x="800" y="376" width="310" height="104" rx="18" class="diagram-box diagram-box-heat"></rect>
+            <text x="955" y="407" text-anchor="middle" class="diagram-label">Heat Return Paths</text>
+            <text x="955" y="431" text-anchor="middle" class="diagram-small">Warm coolant, hot air exhaust</text>
+            <text x="955" y="451" text-anchor="middle" class="diagram-small">or immersion fluid heat transfer</text>
+
+            <rect x="520" y="386" width="180" height="82" rx="16" class="diagram-box diagram-box-heat"></rect>
+            <text x="610" y="416" text-anchor="middle" class="diagram-label">CDU / HX</text>
+            <text x="610" y="438" text-anchor="middle" class="diagram-small">Transfers heat</text>
+            <text x="610" y="455" text-anchor="middle" class="diagram-small">to facility side</text>
+
+            <rect x="280" y="386" width="180" height="82" rx="16" class="diagram-box diagram-box-heat"></rect>
+            <text x="370" y="416" text-anchor="middle" class="diagram-label">Warm Primary</text>
+            <text x="370" y="438" text-anchor="middle" class="diagram-small">Return water</text>
+            <text x="370" y="455" text-anchor="middle" class="diagram-small">to plant</text>
+
+            <rect x="40" y="386" width="180" height="82" rx="16" class="diagram-box diagram-box-heat"></rect>
+            <text x="130" y="416" text-anchor="middle" class="diagram-label">Reject Heat</text>
+            <text x="130" y="438" text-anchor="middle" class="diagram-small">Outside air</text>
+            <text x="130" y="455" text-anchor="middle" class="diagram-small">or water system</text>
+
+            <path d="M955 376 V324" class="diagram-heat"></path>
+            <path d="M800 427 H700" class="diagram-heat"></path>
+            <path d="M520 427 H460" class="diagram-heat"></path>
+            <path d="M280 427 H220" class="diagram-heat"></path>
+
+            <rect x="805" y="515" width="305" height="54" rx="14" class="diagram-box"></rect>
+            <text x="823" y="538" class="diagram-label">Cooling options at rack</text>
+            <text x="823" y="558" class="diagram-small">Air · Rear-door HX · Direct liquid · Immersion</text>
+
+            <line x1="805" y1="596" x2="850" y2="596" class="diagram-power"></line>
+            <text x="860" y="600" class="legend">Electrical power path</text>
+            <line x1="1010" y1="596" x2="1055" y2="596" class="diagram-cool"></line>
+            <text x="1065" y="600" class="legend">Cooling supply</text>
+            <line x1="805" y1="620" x2="850" y2="620" class="diagram-heat"></line>
+            <text x="860" y="624" class="legend">Heat return path</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Cooling decision path</h2>
+        <div class="path">
+          <div class="path-card good">
+            <h3>Enhanced air</h3>
+            <p>Use where density is moderate, whitespace is available, and the site can manage hot/cold aisle containment and airflow discipline.</p>
+          </div>
+          <div class="path-card">
+            <h3>Rear-door heat exchange</h3>
+            <p>Use to capture heat at rack exhaust, reduce room heat load, and add density without redesigning every server for liquid.</p>
+          </div>
+          <div class="path-card warn">
+            <h3>Direct liquid cooling</h3>
+            <p>Use when GPU density, sustained accelerator TDP, noise, fan power or PUE targets make air alone inefficient or impractical.</p>
+          </div>
+          <div class="path-card risk">
+            <h3>Immersion</h3>
+            <p>Use for specialised, ultra-dense environments where operational model, serviceability, fluids, warranties and facilities are designed around immersion from day one.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="power" class="section">
+      <div class="panel">
+        <span class="badge">Power calculation</span>
+        <h2>Translate IT power into facility and grid power.</h2>
+        <p>For executive planning, separate three values: IT power, facility overhead, and grid power. IT power is what the compute, storage and network consume. Grid power is what the utility must deliver to run the whole data centre.</p>
+        <div class="formula">
+          <div class="box">Total facility / grid power</div>
+          <div class="op">=</div>
+          <div class="box">IT power × PUE</div>
+        </div>
+        <div class="formula">
+          <div class="box">Facility overhead</div>
+          <div class="op">=</div>
+          <div class="box">IT power × (PUE − 1)</div>
+        </div>
+      </div>
+
+      <div class="panel calc">
+        <div>
+          <h2>Interactive power calculator</h2>
+          <p class="note">Inputs are planning assumptions, not a site survey. Replace them with actual measured or engineered values.</p>
+          <div class="inputs">
+            <label>IT load in MW
+              <input id="itLoad" type="number" min="0" step="0.1" value="2.0">
+            </label>
+            <label>Target PUE
+              <input id="pue" type="number" min="1" step="0.01" value="1.25">
+            </label>
+            <label>Electricity cost per kWh
+              <input id="rate" type="number" min="0" step="0.01" value="0.12">
+            </label>
+            <label>Power reserve / growth headroom
+              <select id="headroom">
+                <option value="0.10">10%</option>
+                <option value="0.20" selected>20%</option>
+                <option value="0.30">30%</option>
+                <option value="0.50">50%</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="results">
+          <div class="result-row"><span>Estimated grid load</span><strong id="gridLoad">2.50 MW</strong></div>
+          <div class="result-row"><span>Facility overhead</span><strong id="overhead">0.50 MW</strong></div>
+          <div class="result-row"><span>Grid capacity with headroom</span><strong id="gridHeadroom">3.00 MW</strong></div>
+          <div class="result-row"><span>Annual energy</span><strong id="annualKwh">21.90 GWh</strong></div>
+          <div class="result-row"><span>Annual energy cost</span><strong id="annualCost">$2.63M</strong></div>
+          <p class="note">Rule of thumb: every 0.10 improvement in PUE saves 0.10 MW of facility power per 1 MW of IT load, before considering energy price, carbon intensity or demand charges.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>What to include in the IT load model</h2>
+        <table>
+          <thead><tr><th>Layer</th><th>Include</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td>AI compute</td><td>GPU servers, CPU power, memory, local drives, NICs, DPUs</td><td>Dominates rack power and heat; GPU TDP and workload concurrency are critical.</td></tr>
+            <tr><td>Storage</td><td>Scale-out file, object, NVMe, backup and cyber-resilient tiers</td><td>AI data pipelines can add material power outside the GPU racks.</td></tr>
+            <tr><td>Networking</td><td>Backend AI fabric, frontend network, management network</td><td>High-speed fabrics add both power draw and airflow/cooling complexity.</td></tr>
+            <tr><td>Operations</td><td>Management nodes, monitoring, KVM, security, telemetry collectors</td><td>Often missed in early models but needed for production operations.</td></tr>
+            <tr><td>Facility systems</td><td>UPS, switchgear, PDUs, pumps, fans, chillers, controls</td><td>Not IT load, but included in PUE and grid demand.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cooling" class="section">
+      <div class="panel decision">
+        <div class="decision-tabs">
+          <button class="active" data-cooling="air">Enhanced air</button>
+          <button data-cooling="rdhx">Rear-door heat exchange</button>
+          <button data-cooling="dlc">Direct liquid cooling</button>
+          <button data-cooling="immersion">Immersion cooling</button>
+        </div>
+        <div class="decision-content" id="coolingContent"></div>
+      </div>
+
+      <div class="panel">
+        <h2>When liquid cooling becomes the strategic choice</h2>
+        <div class="grid two">
+          <div class="mini-card">
+            <h3>Technical triggers</h3>
+            <p>High accelerator TDP, high kW per rack, sustained training or inferencing, fan power escalation, hot spots, thermal throttling, or inability to add enough air-cooled racks.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Business triggers</h3>
+            <p>Grid constraints, high energy cost, limited whitespace, faster time-to-capacity, sustainability targets, noise reduction, and a need for repeatable rack-scale deployment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="loops" class="section">
+      <div class="panel">
+        <span class="badge">Liquid cooling architecture</span>
+        <h2>Primary and secondary loops keep facility water away from IT coolant.</h2>
+        <div class="flow">
+          <div class="flow-node">
+            <h3>Primary loop</h3>
+            <p>Facility water system connected to chillers, dry coolers, cooling towers or other heat rejection equipment. It feeds the CDU or rear-door heat exchanger.</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="flow-node">
+            <h3>CDU / heat exchanger</h3>
+            <p>Separates the facility side from the IT side, controls temperature, flow and pressure, and transfers heat between loops without mixing fluids.</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="flow-node">
+            <h3>Secondary loop</h3>
+            <p>Conditioned coolant network serving rack manifolds, quick disconnects and cold plates mounted to CPUs or GPUs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>What must be engineered for DLC</h2>
+        <div class="grid two">
+          <div class="mini-card">
+            <h3>Facility prerequisites</h3>
+            <p>Water availability, heat rejection capacity, approach temperature, filtration, floor loading, pipe routes, leak detection, humidity control and maintenance access.</p>
+          </div>
+          <div class="mini-card">
+            <h3>IT prerequisites</h3>
+            <p>DLC-ready servers, rack manifolds, CDUs, supported coolant, quick disconnects, service procedures, telemetry, and operational runbooks.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Operations prerequisites</h3>
+            <p>Water chemistry plan, coolant testing, spares, trained facilities and IT teams, change control for adding/removing nodes, and incident response for leaks or thermal events.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Risk controls</h3>
+            <p>Do not mix unsupported devices or fluids on the same secondary network. Keep primary and secondary loop responsibilities clear across facilities, IT and vendors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dell" class="section">
+      <div class="panel">
+        <span class="badge">Dell-aligned solution map</span>
+        <h2>Relevant Dell tools, platforms and services</h2>
+        <table>
+          <thead><tr><th>Need</th><th>Dell relevance</th><th>Where it fits</th></tr></thead>
+          <tbody>
+            <tr><td>AI compute platform</td><td>Dell AI Factory with NVIDIA; PowerEdge XE portfolio including air-cooled and liquid-cooled options</td><td>Validated AI infrastructure from pilot to production.</td></tr>
+            <tr><td>Rack-scale AI deployment</td><td>Dell Integrated Rack Scalable Systems / IR7000; factory-integrated rack-scale building blocks</td><td>Reduces integration risk for dense AI clusters.</td></tr>
+            <tr><td>Direct liquid cooling</td><td>Dell PowerCool rack-mount CDUs, rack manifolds, DLC-ready PowerEdge servers</td><td>High-density GPU and accelerator cooling.</td></tr>
+            <tr><td>Rear-door heat exchange</td><td>Dell PowerCool enclosed Rear Door Heat Exchanger</td><td>Heat capture at rack exhaust; useful for hybrid and high-density transitions.</td></tr>
+            <tr><td>Power and thermal telemetry</td><td>Dell OpenManage Enterprise Power Manager, iDRAC telemetry, APEX AIOps observability</td><td>Monitor, trend, cap and report power, thermals, utilisation and carbon metrics.</td></tr>
+            <tr><td>Integration and deployment</td><td>Dell Rack Integration Services, ProDeploy, ProSupport, Services for AI</td><td>Factory build, site readiness, deployment, lifecycle and support.</td></tr>
+            <tr><td>Storage and data path</td><td>Dell PowerScale, ObjectScale and AI data platform options</td><td>Data pipelines, model artefacts, RAG and multimodal AI data.</td></tr>
+            <tr><td>Networking</td><td>Dell PowerSwitch plus NVIDIA Spectrum-X / InfiniBand options</td><td>East-west AI fabric and north-south data centre connectivity.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h2>CTO conversation structure</h2>
+        <div class="grid three">
+          <div class="mini-card"><h3>Capacity</h3><p>What IT MW and GPU count are needed now, in 12 months, and at full build-out?</p></div>
+          <div class="mini-card"><h3>Facility</h3><p>What grid capacity, PUE target, water strategy and heat rejection path are feasible?</p></div>
+          <div class="mini-card"><h3>Operating model</h3><p>Who owns telemetry, coolant maintenance, rack changes, incident response and lifecycle updates?</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="readiness" class="section">
+      <div class="panel">
+        <span class="badge">Board-ready checklist</span>
+        <h2>AI data centre readiness checklist</h2>
+        <div class="checklist">
+          <div class="check"><div class="tick">✓</div><div><strong>IT load model complete:</strong> compute, storage, network, management and utilisation scenarios.</div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>PUE and grid model agreed:</strong> IT MW, facility overhead, reserve capacity and energy cost sensitivity.</div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Rack density defined:</strong> kW per rack bands and cooling method mapped by workload.</div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Cooling architecture selected:</strong> air, rear-door, DLC, immersion or hybrid, with operational implications documented.</div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Loop design validated:</strong> primary facility loop, CDU, secondary fluid network, filtration, pressure, temperature and coolant requirements.</div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Monitoring in place:</strong> power, thermals, GPU utilisation, fan power, alerts, PUE trend and carbon reporting.</div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Services plan agreed:</strong> factory integration, site readiness, deployment, spares, support and lifecycle management.</div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Growth path documented:</strong> add-rack process, power expansion, cooling expansion and change windows.</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Recommended next workshop agenda</h2>
+        <table>
+          <thead><tr><th>Workshop</th><th>Decision to make</th><th>Output</th></tr></thead>
+          <tbody>
+            <tr><td>Power and PUE</td><td>Target IT MW, grid MW, PUE and metering boundary</td><td>Power model and measurement plan</td></tr>
+            <tr><td>Cooling architecture</td><td>Air, rear-door, DLC, immersion or hybrid</td><td>Cooling decision matrix and facility prerequisites</td></tr>
+            <tr><td>Rack-scale design</td><td>Rack density, CDU strategy, manifolds, power distribution</td><td>Reference rack and bill-of-material scope</td></tr>
+            <tr><td>Operations</td><td>Telemetry, maintenance, incident and lifecycle ownership</td><td>Runbook, RACI and support model</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer-actions">
+    <button class="export-btn" onclick="window.print()">Export PDF</button>
+  </div>
+</div>
+
+<script>
+const sections = document.querySelectorAll('.section');
+const navButtons = document.querySelectorAll('.nav button');
+navButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    navButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    sections.forEach(s => s.classList.toggle('active', s.id === btn.dataset.section));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+const coolingContent = {
+  air: {
+    title: 'Enhanced air cooling',
+    best: 'Best for moderate density, CPU-heavy workloads, or GPU deployments that fit within existing airflow and containment limits.',
+    requires: 'Hot/cold aisle discipline, blanking panels, controlled supply temperature, adequate CRAH/CRAC capacity, airflow modelling and strong cable management.',
+    watch: 'Risk of fan power escalation, stranded whitespace, hot spots and limited headroom as GPU density rises.'
+  },
+  rdhx: {
+    title: 'Rear-door heat exchange',
+    best: 'Best when the rack exhaust is too hot for room cooling alone, but the organisation wants to avoid or phase direct-to-chip changes.',
+    requires: 'Facility water to the rack row, rear service clearance, condensate and leak management, compatible rack/power/cabling design and maintenance access.',
+    watch: 'It cools exhaust air and reduces room heat load; it does not remove all component heat as directly as cold plates.'
+  },
+  dlc: {
+    title: 'Direct liquid cooling',
+    best: 'Best for dense AI training, fine-tuning and sustained high-TDP inference where CPUs/GPUs need direct heat removal.',
+    requires: 'DLC-ready servers, CDUs, manifolds, primary and secondary loop design, supported coolant, filtration, leak detection, dew-point control and trained operations.',
+    watch: 'It is a facilities and operations programme, not only a server feature. Maintenance, water chemistry and vendor support boundaries must be explicit.'
+  },
+  immersion: {
+    title: 'Immersion cooling',
+    best: 'Best for specialised ultra-dense deployments where the full environment is designed around dielectric fluid, service procedures and component compatibility.',
+    requires: 'Immersion-qualified design, fluid management, lift/service process, warranty alignment, facility heat rejection and team training.',
+    watch: 'Powerful option, but operationally different. Treat it as a platform architecture decision rather than a retrofit.'
+  }
+};
+function renderCooling(key) {
+  const item = coolingContent[key];
+  const coolingContentEl = document.getElementById('coolingContent');
+  coolingContentEl.innerHTML = `
+    <h2>${item.title}</h2>
+    <div class="grid">
+      <div class="mini-card"><h3>Use when</h3><p>${item.best}</p></div>
+      <div class="mini-card"><h3>Requires</h3><p>${item.requires}</p></div>
+      <div class="mini-card"><h3>Watch-outs</h3><p>${item.watch}</p></div>
+    </div>
+  `;
+}
+document.querySelectorAll('.decision-tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.decision-tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCooling(btn.dataset.cooling);
+  });
+});
+renderCooling('air');
+
+function formatMoney(v) {
+  if (v >= 1000000) return '$' + (v / 1000000).toFixed(2) + 'M';
+  if (v >= 1000) return '$' + (v / 1000).toFixed(0) + 'K';
+  return '$' + v.toFixed(0);
+}
+function updateCalc() {
+  const it = Number(document.getElementById('itLoad').value || 0);
+  const pue = Math.max(1, Number(document.getElementById('pue').value || 1));
+  const rate = Number(document.getElementById('rate').value || 0);
+  const headroom = Number(document.getElementById('headroom').value || 0);
+  const grid = it * pue;
+  const overhead = it * (pue - 1);
+  const gridHeadroom = grid * (1 + headroom);
+  const annualKwh = grid * 1000 * 8760;
+  const cost = annualKwh * rate;
+  document.getElementById('gridLoad').textContent = grid.toFixed(2) + ' MW';
+  document.getElementById('overhead').textContent = overhead.toFixed(2) + ' MW';
+  document.getElementById('gridHeadroom').textContent = gridHeadroom.toFixed(2) + ' MW';
+  document.getElementById('annualKwh').textContent = (annualKwh / 1000000).toFixed(2) + ' GWh';
+  document.getElementById('annualCost').textContent = formatMoney(cost);
+}
+['itLoad','pue','rate','headroom'].forEach(id => document.getElementById(id).addEventListener('input', updateCalc));
+updateCalc();
+
+if (window.GleanBridge) {
+  GleanBridge.postMessage({
+    actionId: 'export-pdf',
+    type: 'glean-add-menu',
+    metadata: { label: 'Export PDF', icon: 'export' }
+  });
+  GleanBridge.onMessage?.('action', async d => {
+    if (d.actionId !== 'export-pdf') return;
+    await document.fonts.ready;
+    window.print();
+  });
+}
+</script>
+</body>
+</html>
